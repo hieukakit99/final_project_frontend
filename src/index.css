@@ -1,0 +1,100 @@
+@font-face {
+  font-family: robotoBlack;
+  src: url(../src/styles/font/roboto/Roboto-Black.ttf) format("truetype");
+  font-size: normal;
+}
+
+@font-face {
+  font-family: robotoLight;
+  src: url(../src/styles/font/roboto/Roboto-Light.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoLightItalic;
+  src: url(../src/styles/font/roboto/Roboto-LightItalic.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoBold;
+  src: url(../src/styles/font/roboto/Roboto-Bold.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoMedium;
+  src: url(../src/styles/font/roboto/Roboto-Medium.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoMediumItalic;
+  src: url(../src/styles/font/roboto/Roboto-MediumItalic.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoRegular;
+  src: url(../src/styles/font/roboto/Roboto-Regular.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoThin;
+  src: url(../src/styles/font/roboto/Roboto-Thin.ttf) format("truetype");
+  font-size: normal;
+}
+@font-face {
+  font-family: robotoThinItalic;
+  src: url(../src/styles/font/roboto/Roboto-ThinItalic.ttf) format("truetype");
+  font-size: normal;
+}
+/* define font-family*/
+* {
+  box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+html,
+body {
+  font-family: robotoLight, Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.user-pagination .page-link {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  border-color: #dfdfdf;
+}
+.user-pagination .page-item.active .page-link {
+  color: white;
+  background-color: #299be4;
+  border-color: #299be4;
+}
+
+.user-pagination .page-link:focus {
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+.user-pagination .page-link:focus-visible {
+  outline: none;
+}

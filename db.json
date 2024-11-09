@@ -1,0 +1,100 @@
+{
+    "users": [
+      {
+        "id": "013a",
+        "email": "ht855738@gmail.com",
+        "fullName": "Tran Van Thanh",
+        "department": "cmc",
+        "position": "ba",
+        "dateCreated": "2024-09-11T15:45:57.609Z"
+      },
+      {
+        "id": "be2e",
+        "email": "ht855738@gmail.com",
+        "fullName": "Tran Van Thanh",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-16T09:20:40.942Z"
+      },
+      {
+        "id": "60f6",
+        "email": "ht855738@gmail.com",
+        "fullName": "Tran Van Thanh",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T03:36:44.784Z"
+      },
+      {
+        "id": "de98",
+        "email": "abc@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T03:37:08.651Z"
+      },
+      {
+        "id": "01d8",
+        "email": "a",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T03:40:48.042Z"
+      },
+      {
+        "id": "a922",
+        "email": "qwertyuiop@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T04:13:18.051Z"
+      },
+      {
+        "id": "eb16",
+        "email": "ht855738@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T10:17:36.927Z"
+      },
+      {
+        "id": "b417",
+        "email": "zxy@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "rikkesoft",
+        "position": "sale",
+        "dateCreated": "2024-09-17T10:18:01.966Z"
+      },
+      {
+        "id": "489b",
+        "email": "ht855738@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T10:49:51.434Z"
+      },
+      {
+        "id": "2690",
+        "email": "ht855738@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-17T11:03:45.794Z"
+      },
+      {
+        "id": "dc9f",
+        "email": "ht855738@gmail.com",
+        "fullName": "Trần Văn Thành",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-18T13:50:03.057Z"
+      },
+      {
+        "id": "50ec",
+        "email": "afc@gmail.com",
+        "fullName": "Tran Van Thanh",
+        "department": "vti",
+        "position": "dev",
+        "dateCreated": "2024-09-18T15:40:23.862Z"
+      }
+    ]
+  }

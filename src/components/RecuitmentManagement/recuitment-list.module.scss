@@ -1,0 +1,231 @@
+.list {
+  &__container {
+    min-height: calc(100vh - 66px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f8f9fa;
+  }
+
+  &__wrapper {
+    width: 90%;
+    max-width: 1140px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  &__header {
+    padding: 20px;
+    background: linear-gradient(to right, #8360c3, #2ebf91);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    a {
+      display: inline-flex;
+      padding: 8px 16px;
+      column-gap: 8px;
+      border-radius: 5px;
+      text-decoration: none;
+      background-color: white;
+      align-items: center;
+      font-size: 14px;
+      color: #566787;
+      transition: background-color 0.3s, color 0.3s;
+
+      &:hover {
+        background-color: #f0f2f5;
+        color: #299be4;
+      }
+
+      span {
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+
+        &:first-child {
+          display: inline-flex;
+          min-width: 16px;
+          height: 16px;
+          width: 16px;
+          background-image: url(../../../public/icons/plus-circle-fill.svg);
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+        }
+      }
+    }
+  }
+
+  &__table {
+    margin: 0;
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background-color: #f1f5f9;
+    }
+
+    th,
+    td {
+      border: 1px solid #e0e0e0;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+    }
+
+    th {
+      font-weight: 600;
+      color: #444;
+    }
+
+    td {
+      font-size: 13px;
+    }
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+
+    button {
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__btn__delete,
+  &__btn__edit {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &__btn__delete {
+    background-image: url(../../../public/icons/x-circle-fill.svg);
+  }
+
+  &__btn__edit {
+    background-image: url(../../../public/icons/pencil-square.svg);
+  }
+}
+.btn {
+  &__popup__buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__popup__delete,
+  &__popup__cancel {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__popup__delete {
+    background-image: linear-gradient(25deg, #d64c7f, #ee4758 50%);
+    color: white;
+
+    &:hover {
+      background-color: #1a7cb0;
+    }
+  }
+
+  &__popup__cancel {
+    background-color: #e0e0e0;
+    color: #333;
+
+    &:hover {
+      background-color: #c0c0c0;
+    }
+  }
+
+  &__popup__modalTitle {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+
+    text-align: center;
+  }
+
+  &__popup__confirmText {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+.pagination {
+  width: 90%;
+  max-width: 1140px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+
+  select {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #d1cdcd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+
+    &:focus-visible {
+      outline: none;
+      border-color: #299be4;
+    }
+  }
+}
+
+.search__container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .search__input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #299be4;
+      outline: none;
+    }
+  }
+}
