@@ -1,0 +1,183 @@
+.userManagement {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form {
+    padding: 20px;
+  }
+}
+.info {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+  }
+  &__form {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  &__label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+  }
+
+  &__formGroup {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.9rem;
+
+      &:disabled {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+  &__submit {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, #00ffcc 0%, #66ff66 90%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: linear-gradient(to right, #00cc99 0%, #99ff33 90%);
+    }
+  }
+}
+.service {
+  &__card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  &__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+    .changePhotoBtn {
+      background: linear-gradient(
+        90deg,
+        rgba(255, 123, 123, 0.9641106442577031) 0%,
+        rgba(249, 181, 40, 1) 100%
+      );
+
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      &:hover {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 177, 56, 0.9641106442577031) 0%,
+          rgba(249, 63, 40, 1) 100%
+        );
+      }
+    }
+  }
+}
+.pointsInfo {
+  text-align: center;
+  margin-bottom: 20px;
+
+  a {
+    color: #0066cc;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+  }
+
+  .expireDate {
+    color: #666;
+    font-size: 0.9rem;
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+
+  .statItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .statLabel {
+      color: #00c853;
+      font-size: 0.9rem;
+    }
+
+    .statValue {
+      font-weight: 500;
+    }
+  }
+}

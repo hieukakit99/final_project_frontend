@@ -1,10 +1,9 @@
-import EditClass from "./components/TrainingManagement/EditTrainingClass/EditClass";
-import TrainningList from "./components/TrainingManagement/TrainingList";
+import UserList from "./components/UserProfile/UserList/UserList";
 
 function App() {
   return (
     <div>
-      <EditClass />
+      <UserList />
     </div>
   );
 }

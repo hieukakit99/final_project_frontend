@@ -154,7 +154,7 @@
     }
   }
   &__btn {
-    background-color: #e21c34;
+    background: linear-gradient(to right, #ff6666 25%, #cc3300 100%);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -165,15 +165,9 @@
     justify-content: center;
     font-size: 18px;
     font-weight: bold;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-
-    &:hover {
-      background-color: #218838;
-      transform: scale(1.1);
-    }
   }
   &__listBtn {
-    background-color: #e74c3c;
+    background: linear-gradient(to right, #ff6666 25%, #cc3300 100%);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -185,7 +179,7 @@
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: #c0392b;
+      background: linear-gradient(to top left, #ff6666 15%, #003366 100%);
     }
   }
 

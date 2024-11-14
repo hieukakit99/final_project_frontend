@@ -11,7 +11,7 @@ const EditClass = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleAddCandidate = () => {
-    setCandidate(candidate + 1);
+    setCandidate(candidate - 1);
   };
 
   const handleSave = () => {
