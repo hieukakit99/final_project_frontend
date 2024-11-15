@@ -1,0 +1,101 @@
+// Container Styles
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  h2 {
+    color: #555;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  // Table Styles
+  .table {
+    width: 80%;
+    margin: 0 auto 20px;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: center; // Căn giữa nội dung theo chiều ngang
+      vertical-align: middle; // Căn giữa nội dung theo chiều dọc
+    }
+
+    th {
+      background: linear-gradient(to top, #0099cc 0%, #0066ff 100%);
+
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    tbody {
+      tr {
+        transition: background 0.2s ease;
+
+        &:hover {
+          background-color: #e9ecef;
+        }
+
+        td {
+          font-size: 14px;
+          color: #222;
+
+          &:first-child {
+            font-weight: 600;
+            color: #222;
+          }
+
+          &:last-child {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Pagination Styles
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+// Button Styles
+.btnAccept,
+.btnDecline {
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &.btnAccept {
+    background: linear-gradient(to bottom, #009999 0%, #00cc66 100%);
+    color: #fff;
+
+    &:hover {
+      background: linear-gradient(to bottom, #009999 0%, #00ff99 100%);
+    }
+  }
+
+  &.btnDecline {
+    background: linear-gradient(to bottom, #990033 0%, #ff6600 100%);
+    color: #fff;
+
+    &:hover {
+      background: linear-gradient(to bottom, #cc0000 0%, #ff9966 100%);
+    }
+  }
+}

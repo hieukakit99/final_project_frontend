@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./dashboard.module.scss";
 import List from "../Icons/List";
 import TriangleDown from "../Icons/TriangleDown";
@@ -6,6 +6,8 @@ import { useState } from "react";
 import UserList from "../UserProfile/UserList/UserList";
 
 const Dashboard = () => {
+  const [isApprovalOpen, setIsApprovalOpen] = useState(false); // State to control dropdown visibility
+
   const classes = {
     dashboardContainer: `${style.dashboard__container}`,
     header: `${style.dashboard__header}`,
@@ -13,6 +15,11 @@ const Dashboard = () => {
     menuItem: `${style.dashboard__item}`,
     menuItemIcon: `${style.dashboard__itemIcon}`,
     menuItemText: `${style.dashboard__itemText}`,
+    approvalDropdown: `${style.approvalDropdown}`,
+  };
+
+  const toggleApproval = () => {
+    setIsApprovalOpen(!isApprovalOpen);
   };
 
   return (
@@ -51,10 +58,24 @@ const Dashboard = () => {
           <span className={classes.menuItemText}>Quản lý Đào tạo</span>
         </Link>
 
-        <Link to="/reports" className={classes.menuItem}>
-          <span className={classes.menuItemIcon}>📊</span>
-          <span className={classes.menuItemText}>Quản lý Báo Cáo</span>
-        </Link>
+        {/* Approval Dropdown */}
+        <div className={classes.menuItem} onClick={toggleApproval}>
+          <span className={classes.menuItemIcon}>✅</span>
+          <span className={classes.menuItemText}>Approval</span>
+          <TriangleDown />
+        </div>
+        {isApprovalOpen && (
+          <div className={classes.approvalDropdown}>
+            <Link to="/reports" className={classes.menuItem}>
+              <span className={classes.menuItemIcon}>📊</span>
+              <span className={classes.menuItemText}>Quản lý Báo Cáo</span>
+            </Link>
+            <Link to="/request" className={classes.menuItem}>
+              <span className={classes.menuItemIcon}>❓</span>
+              <span className={classes.menuItemText}>Quản lý Request</span>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

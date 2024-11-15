@@ -187,7 +187,7 @@ const UserList = () => {
                 Xem chính sách tích lũy điểm
               </a>
               <p className={styles.expireDate}>
-                Thời hạn sử dụng dịch vụ: {userData.expireDate}
+                Ngày tham gia: {userData.expireDate}
               </p>
             </div>
 
