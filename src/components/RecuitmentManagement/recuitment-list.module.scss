@@ -190,13 +190,14 @@
 }
 
 .pagination {
-  width: 90%;
-  margin: 20px auto 0 auto;
+  width: 75%;
+  margin: 20px 0px;
+  padding-right: 100px;
   font-size: 13px;
   display: flex;
   align-items: center;
-  column-gap: 15px;
-
+  justify-content: space-evenly;
+  column-gap: 120px;
   select {
     width: 60px;
     padding: 5px;

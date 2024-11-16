@@ -1,25 +1,59 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import style from "./recruitment-edit.module.scss";
-import React, { useState } from "react";
+import { recruitmentApi } from "../../../api/recruitmentApi";
 
 const RecruitmentEdit = () => {
+  const { id } = useParams(); // Get candidate ID from the URL
+  const history = useNavigate(); // For navigation after save
+
   const [formData, setFormData] = useState({
-    department: "Java",
-    name: "Nguyen Van A",
-    birth: "2000-05-19",
-    dateInterview: "2024-10-24",
-    points: 4.72,
-    interview: 5.24,
-    status: "Fail",
+    department: "",
+    name: "",
+    birth: "",
+    dateInterview: "",
+    points: 0,
+    interview: 0,
+    status: "",
   });
+
+  // Fetch candidate data when component mounts or id changes
+  useEffect(() => {
+    const fetchCandidate = async () => {
+      try {
+        const candidate = await recruitmentApi.getCandidateById(id);
+        setFormData({
+          department: candidate.department,
+          name: candidate.name,
+          birth: candidate.birth,
+          dateInterview: candidate.dateInterview,
+          points: candidate.points,
+          interview: candidate.interview,
+          status: candidate.status,
+        });
+      } catch (error) {
+        console.error("Error fetching candidate:", error);
+      }
+    };
+
+    if (id) {
+      fetchCandidate();
+    }
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSave = () => {
-    console.log("Saved data:", formData);
+  const handleSave = async () => {
+    try {
+      await recruitmentApi.updateCandidate(id, formData);
+      console.log("Saved data:", formData);
+      history.push("/recruitments"); // Navigate back to recruitment list after saving
+    } catch (error) {
+      console.error("Error saving candidate data:", error);
+    }
   };
 
   return (
@@ -42,6 +76,7 @@ const RecruitmentEdit = () => {
             <option value="Java">Java</option>
             <option value="Python">Python</option>
             <option value="JavaScript">JavaScript</option>
+            {/* Add more options if needed */}
           </select>
         </div>
 
@@ -113,4 +148,5 @@ const RecruitmentEdit = () => {
     </>
   );
 };
+
 export default RecruitmentEdit;

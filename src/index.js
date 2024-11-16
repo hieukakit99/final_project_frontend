@@ -9,7 +9,7 @@ import LayoutRoot from "./components/LayoutRoot/LayoutRoot";
 import SignIn from "./components/SignIn/SignIn";
 import UserList from "./components/UserProfile/UserList/UserList";
 import RecruitmentEdit from "./components/RecuitmentManagement/RecruitmentEdit/RecruitmentEdit";
-import RecruitmentList from "./components/RecuitmentManagement/RecuitmentList";
+import RecruitmentList from "./components/RecuitmentManagement/RecruitmentList";
 import TrainingList from "./components/TrainingManagement/TrainingList";
 import CreateTrainingClass from "./components/TrainingManagement/CreateNewClass/CreateTrainingClass";
 import EditClass from "./components/TrainingManagement/EditTrainingClass/EditClass";

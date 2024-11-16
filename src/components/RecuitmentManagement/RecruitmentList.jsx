@@ -3,6 +3,7 @@ import style from "./recuitment-list.module.scss";
 import { Modal, Pagination } from "react-bootstrap";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import { recruitmentApi } from "../../api/recruitmentApi";
 
 const departments = [
   { value: "vti", label: "VTI Group" },
@@ -19,51 +20,35 @@ const renderDepartment = (value) => {
 };
 
 const RecruitmentList = () => {
-  const [candidateList, setCandidateList] = useState([
-    {
-      id: "example",
-      department: "vti",
-      name: "Nguyễn Văn A",
-      birth: "1995-05-10",
-      points: 90,
-      interview: "Đã hoàn thành",
-      status: "Được chấp nhận",
-    },
-    // Thêm nhiều ứng viên khác tại đây nếu cần
-  ]);
+  const [candidateList, setCandidateList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [pageSize, setPageSize] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fetch candidate list from API
+  // Fetch candidate list from the recruitmentApi
   const fetchCandidates = async () => {
     try {
-      const response = await fetch("http://localhost:3000/candidates");
-      if (!response.ok) throw new Error("Failed to fetch candidates");
-      const data = await response.json();
-      setCandidateList(data.reverse());
+      const candidates = await recruitmentApi.getCandidates();
+      setCandidateList(candidates.reverse());
     } catch (error) {
       console.error("Error fetching candidates:", error);
     }
   };
 
-  // Delete a candidate
+  // Delete a candidate using recruitmentApi
   const deleteCandidate = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/candidates/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) throw new Error("Failed to delete candidate");
-      await fetchCandidates(); // Refresh list after deletion
+      await recruitmentApi.deleteCandidate(id);
+      await fetchCandidates(); // Refresh the list after deletion
       setShowModal(false);
     } catch (error) {
       console.error("Error deleting candidate:", error);
     }
   };
 
-  // Filter candidates based on search term
+  // Filter candidates based on the search term
   const filteredCandidates = useMemo(() => {
     if (!searchTerm) return candidateList;
     return candidateList.filter((candidate) =>
@@ -86,29 +71,6 @@ const RecruitmentList = () => {
   // Fetch data on component mount
   useEffect(() => {
     fetchCandidates();
-  }, []);
-  useEffect(() => {
-    const fetchWithExample = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/candidates");
-        if (!response.ok) throw new Error("Failed to fetch candidates");
-        const data = await response.json();
-        const exampleCandidate = {
-          id: "example",
-          department: "vti",
-          name: "Nguyễn Văn A",
-          birth: "1995-05-10",
-          points: 90,
-          interview: "Đã hoàn thành",
-          status: "Được chấp nhận",
-        };
-        setCandidateList([exampleCandidate, ...data.reverse()]);
-      } catch (error) {
-        console.error("Error fetching candidates:", error);
-      }
-    };
-
-    fetchWithExample();
   }, []);
 
   return (
@@ -154,7 +116,6 @@ const RecruitmentList = () => {
                       <Link
                         to={`/recruitments/${candidate.id}`}
                         className={style.list__btn__edit}
-                        aria-label="Edit candidate"
                       />
                       <button
                         className={style.list__btn__delete}
@@ -162,7 +123,6 @@ const RecruitmentList = () => {
                           setShowModal(true);
                           setSelectedCandidate(candidate);
                         }}
-                        aria-label="Delete candidate"
                       />
                     </td>
                   </tr>
