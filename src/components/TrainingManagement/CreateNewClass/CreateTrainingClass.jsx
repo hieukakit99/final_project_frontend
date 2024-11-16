@@ -28,7 +28,7 @@ const CreateTrainingClass = () => {
   return (
     <>
       <div className={style.btn__back}>
-        <Link to="/training">
+        <Link to="/trainings">
           <button>Back</button>
         </Link>
       </div>

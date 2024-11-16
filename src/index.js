@@ -8,7 +8,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LayoutRoot from "./components/LayoutRoot/LayoutRoot";
 import SignIn from "./components/SignIn/SignIn";
 import UserList from "./components/UserProfile/UserList/UserList";
-import UpdateEmployee from "./components/UserProfile/UpdateEmployee/UpdateEmployee";
 import RecruitmentEdit from "./components/RecuitmentManagement/RecruitmentEdit/RecruitmentEdit";
 import RecruitmentList from "./components/RecuitmentManagement/RecuitmentList";
 import TrainingList from "./components/TrainingManagement/TrainingList";
@@ -32,23 +31,23 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/recruitment",
+        path: "/recruitments",
         element: <RecruitmentList />,
       },
       {
-        path: "/recruitment/:id",
+        path: "/recruitments/:id",
         element: <RecruitmentEdit />,
       },
       {
-        path: "/training",
+        path: "/trainings",
         element: <TrainingList />,
       },
       {
-        path: "/training/create",
+        path: "/trainings/create",
         element: <CreateTrainingClass />,
       },
       {
-        path: "/training/:id",
+        path: "/trainings/:id",
         element: <EditClass />,
       },
       {

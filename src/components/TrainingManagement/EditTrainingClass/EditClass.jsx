@@ -1,34 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import style from "./edit-class.module.scss";
-import { Link } from "react-router-dom";
+import { trainingApi } from "../../../api/traningApi";
 
 const EditClass = () => {
-  const [className, setClassName] = useState("Java");
-  const [tutor, setTutor] = useState("Nguyen Van A");
-  const [dateStart, setDateStart] = useState("2024-10-25");
-  const [candidate, setCandidate] = useState(15);
-  const [status, setStatus] = useState("Unstarted");
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [className, setClassName] = useState("");
+  const [tutor, setTutor] = useState("");
+  const [dateStart, setDateStart] = useState("");
+  const [candidate, setCandidate] = useState(0);
+  const [status, setStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleAddCandidate = () => {
-    setCandidate(candidate - 1);
-  };
+  useEffect(() => {
+    const fetchClass = async () => {
+      try {
+        const training = await trainingApi.getTrainingById(id);
+        setClassName(training.name);
+        setTutor(training.tutor);
+        setDateStart(training.dateStart);
+        setCandidate(training.candidateCount);
+        setStatus(training.status);
+      } catch (error) {
+        console.error("Failed to fetch training details:", error);
+      }
+    };
 
-  const handleSave = () => {
-    // Handle saving edited class info
-    console.log({
-      className,
-      tutor,
-      dateStart,
-      candidate,
-      status,
-    });
+    fetchClass();
+  }, [id]);
+
+  const handleSave = async () => {
+    try {
+      const updatedTraining = {
+        name: className,
+        tutor,
+        dateStart,
+        candidateCount: candidate,
+        status,
+      };
+
+      await trainingApi.updateTraining(id, updatedTraining);
+      alert("Class updated successfully!");
+      navigate("/trainings");
+    } catch (error) {
+      console.error("Failed to update training:", error);
+      alert("Failed to update class. Please try again.");
+    }
   };
 
   return (
     <>
       <div className={style.btn__back}>
-        <Link to="/training">
+        <Link to="/trainings">
           <button>Back</button>
         </Link>
       </div>
@@ -74,7 +99,7 @@ const EditClass = () => {
               <div className={style.candidate__input}>
                 <input type="number" value={candidate} readOnly />
                 <button
-                  onClick={handleAddCandidate}
+                  onClick={() => setCandidate(candidate - 1)}
                   className={style.candidate__btn}
                 >
                   -
@@ -94,7 +119,6 @@ const EditClass = () => {
               </select>
             </div>
           </div>
-
           <div className={style.candidate__container}>
             <h3>Danh sách ứng viên</h3>
             <input
@@ -123,11 +147,11 @@ const EditClass = () => {
             </ul>
           </div>
         </div>
-
-        <button onClick={handleSave} className={style.save_btn}>
-          Save
-        </button>
       </div>
+
+      <button onClick={handleSave} className={style.save_btn}>
+        Save
+      </button>
     </>
   );
 };

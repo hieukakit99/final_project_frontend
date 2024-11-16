@@ -25,7 +25,7 @@ const RecruitmentEdit = () => {
   return (
     <>
       <div className={style.recruitment__back}>
-        <Link to="/recruitment">
+        <Link to="/recruitments">
           <button>Back</button>
         </Link>
       </div>

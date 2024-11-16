@@ -71,7 +71,8 @@
     border-collapse: collapse;
 
     thead {
-      background-color: #f1f5f9;
+      background: linear-gradient(to bottom, #3333cc 0%, #006699 100%);
+      color: #f0f2f5;
     }
 
     th,
@@ -85,7 +86,7 @@
 
     th {
       font-weight: 600;
-      color: #444;
+      color: #f0f2f5;
     }
 
     td {
@@ -190,12 +191,11 @@
 
 .pagination {
   width: 90%;
-  max-width: 1140px;
-  margin: 20px auto;
+  margin: 20px auto 0 auto;
+  font-size: 13px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 14px;
+  column-gap: 15px;
 
   select {
     width: 60px;

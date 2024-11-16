@@ -48,12 +48,12 @@ const Dashboard = () => {
           </span>
         </Link>
 
-        <Link to="/recruitment" className={classes.menuItem}>
+        <Link to="/recruitments" className={classes.menuItem}>
           <span className={classes.menuItemIcon}>📚</span>
           <span className={classes.menuItemText}>Quản lý Tuyển dụng</span>
         </Link>
 
-        <Link to="/training" className={classes.menuItem}>
+        <Link to="/trainings" className={classes.menuItem}>
           <span className={classes.menuItemIcon}>📘</span>
           <span className={classes.menuItemText}>Quản lý Đào tạo</span>
         </Link>
