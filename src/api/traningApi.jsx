@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const API_URL = "https://65a14790600f49256fb15464.mockapi.io";
+const API_NAME = "trainingApi";
 
 export const trainingApi = {
   getTrainings: async () => {
     try {
-      const response = await axios.get(`${API_URL}/trainingApi`);
+      const response = await axios.get(`${API_URL}/${API_NAME}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching trainings:", error);
@@ -15,7 +16,7 @@ export const trainingApi = {
 
   getTrainingById: async (trainingId) => {
     try {
-      const response = await axios.get(`${API_URL}/trainingApi/${trainingId}`);
+      const response = await axios.get(`${API_URL}/${API_NAME}/${trainingId}`);
       return response.data;
     } catch (error) {
       console.error(`Error fetching training with ID ${trainingId}:`, error);
@@ -25,7 +26,7 @@ export const trainingApi = {
 
   createTraining: async (trainingData) => {
     try {
-      const response = await axios.post(`${API_URL}/trainingApi`, trainingData);
+      const response = await axios.post(`${API_URL}/${API_NAME}`, trainingData);
       return response.data;
     } catch (error) {
       console.error("Error creating training:", error);
@@ -36,7 +37,7 @@ export const trainingApi = {
   updateTraining: async (trainingId, trainingData) => {
     try {
       const response = await axios.put(
-        `${API_URL}/trainingApi/${trainingId}`,
+        `${API_URL}/${API_NAME}/${trainingId}`,
         trainingData
       );
       return response.data;
@@ -54,7 +55,7 @@ export const trainingApi = {
   deleteTraining: async (trainingId) => {
     try {
       const response = await axios.delete(
-        `${API_URL}/trainingApi/${trainingId}`
+        `${API_URL}/${API_NAME}/${trainingId}`
       );
       return response.data;
     } catch (error) {
