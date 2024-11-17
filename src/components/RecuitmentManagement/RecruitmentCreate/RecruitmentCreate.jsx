@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import style from "./recruitment-edit.module.scss";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import style from "./recruitment-create.module.scss";
 import { recruitmentApi } from "../../../api/recruitmentApi";
 
-const RecruitmentEdit = () => {
-  const { id } = useParams(); // Get candidate ID from the URL
-  const navigate = useNavigate(); // For navigation after save
+const RecruitmentCreate = () => {
+  const history = useNavigate(); // Điều hướng sau khi lưu
 
   const [formData, setFormData] = useState({
     department: "",
@@ -17,55 +16,30 @@ const RecruitmentEdit = () => {
     status: "",
   });
 
-  // Fetch candidate data when component mounts or id changes
-  useEffect(() => {
-    const fetchCandidate = async () => {
-      try {
-        const candidate = await recruitmentApi.getCandidateById(id);
-        setFormData({
-          department: candidate.department,
-          name: candidate.name,
-          birth: candidate.birth,
-          dateInterview: candidate.dateInterview,
-          points: candidate.points,
-          interview: candidate.interview,
-          status: candidate.status,
-        });
-      } catch (error) {
-        console.error("Error fetching candidate:", error);
-      }
-    };
-
-    if (id) {
-      fetchCandidate();
-    }
-  }, [id]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(name, value); // Log giá trị để kiểm tra
   };
 
   const handleSave = async () => {
     try {
-      await recruitmentApi.updateCandidate(id, formData);
-      console.log("Saved data:", formData);
-      navigate("/recruitments"); // Navigate back to recruitment list after saving
+      // Tạo ứng viên mới
+      await recruitmentApi.createCandidate(formData);
+      history("/recruitments"); // Quay lại danh sách ứng viên
     } catch (error) {
-      console.error("Error saving candidate data:", error);
+      console.error("Error creating candidate:", error);
     }
   };
 
   return (
     <>
       <div className={style.recruitment__back}>
-        <Link to="/recruitments">
-          <button>Back</button>
-        </Link>
+        <button onClick={() => history("/recruitments")}>Back</button>
       </div>
 
       <div className={style.recruitment__edit}>
-        <h2>Edit Recruitment</h2>
+        <h2>Create Recruitment</h2>
         <div className={style.recruitment__form}>
           <label>Department</label>
           <select
@@ -76,7 +50,6 @@ const RecruitmentEdit = () => {
             <option value="Java">Java</option>
             <option value="Python">Python</option>
             <option value="JavaScript">JavaScript</option>
-            {/* Add more options if needed */}
           </select>
         </div>
 
@@ -137,7 +110,6 @@ const RecruitmentEdit = () => {
           <select name="status" value={formData.status} onChange={handleChange}>
             <option value="Pass">Pass</option>
             <option value="Fail">Fail</option>
-            {/* Add more options if needed */}
           </select>
         </div>
 
@@ -149,4 +121,4 @@ const RecruitmentEdit = () => {
   );
 };
 
-export default RecruitmentEdit;
+export default RecruitmentCreate;

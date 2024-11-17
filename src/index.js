@@ -15,6 +15,7 @@ import CreateTrainingClass from "./components/TrainingManagement/CreateNewClass/
 import EditClass from "./components/TrainingManagement/EditTrainingClass/EditClass";
 import RequestManager from "./components/RequestManager/RequestManager";
 import ReportManager from "./components/ReportManager/ReportManager";
+import RecruitmentCreate from "./components/RecuitmentManagement/RecruitmentCreate/RecruitmentCreate";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/recruitments",
         element: <RecruitmentList />,
+      },
+      {
+        path: "/recruitments/create",
+        element: <RecruitmentCreate />,
       },
       {
         path: "/recruitments/:id",

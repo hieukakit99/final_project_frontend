@@ -89,6 +89,11 @@ const RecruitmentList = () => {
                 aria-label="Search candidates"
               />
             </div>
+
+            <Link to="/recruitments/create">
+              <span></span>
+              <span>Thêm ứng viên mới</span>
+            </Link>
           </div>
           <div>
             <table className={style.list__table}>

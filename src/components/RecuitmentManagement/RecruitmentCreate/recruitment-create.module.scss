@@ -1,0 +1,92 @@
+.recruitment {
+  &__back {
+    margin-left: 45px;
+    button {
+      padding: 10px 22px;
+      width: 75px;
+      margin-top: 20px;
+      background-color: #3ff0d6;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        background-color: #51c7ed;
+      }
+    }
+  }
+  &__edit {
+    width: 100%;
+    max-width: 400px;
+    margin: 5px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Soft shadow for a more polished look
+    text-align: center;
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+
+    label {
+      margin-bottom: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        border-color: #3ff0d2; // Highlights input on focus
+        outline: none;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3ff0d2;
+    border: none;
+    margin-top: 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: #34c6a7;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      background-color: #2ba58b;
+      transform: translateY(0);
+    }
+  }
+}
