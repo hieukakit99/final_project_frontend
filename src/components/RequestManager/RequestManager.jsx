@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./request-manager.module.scss";
 import { Pagination, Modal, Button, Form } from "react-bootstrap";
 import moment from "moment";
+import requestApi from "../../api/requestApi"; // Import the API module
 
 const RequestManager = () => {
   const [requests, setRequests] = useState([]);
@@ -12,37 +13,17 @@ const RequestManager = () => {
   const pageSize = 5;
 
   const fetchRequests = async () => {
-    const data = [
-      {
-        id: 1,
-        employee: "Nguyên Văn A",
-        type: "Nghỉ phép",
-        details: "Yêu cầu nghỉ phép 5 ngày",
-        status: "Chờ duyệt",
-        createdAt: "2023-10-10",
-        updatedAt: "2023-10-10",
-        managerApproved: false,
-        adminApproved: false,
-      },
-      {
-        id: 2,
-        employee: "Nguyên Văn B",
-        type: "Thiết bị",
-        details: "Yêu cầu laptop mới",
-        status: "Đã duyệt bởi QL",
-        createdAt: "2023-10-08",
-        updatedAt: "2023-10-09",
-        managerApproved: true,
-        adminApproved: false,
-      },
-      // More data here...
-    ];
-    setRequests(data);
+    try {
+      const data = await requestApi.getAllRequests(currentPage, pageSize);
+      setRequests(data);
+    } catch (error) {
+      console.error("Failed to fetch requests", error);
+    }
   };
 
   useEffect(() => {
     fetchRequests();
-  }, []);
+  }, [currentPage]);
 
   const handleCurrentPage = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -56,16 +37,24 @@ const RequestManager = () => {
     setShowRejectModal(true);
   };
 
-  const handleConfirmReject = () => {
-    // Xử lý logic từ chối ở đây
-    console.log("Lý do từ chối:", rejectReason);
-    setShowRejectModal(false);
-    setRejectReason("");
+  const handleConfirmReject = async () => {
+    try {
+      await requestApi.rejectRequest(selectedRequestId, rejectReason);
+      setShowRejectModal(false);
+      setRejectReason("");
+      fetchRequests(); // Refresh the list after rejection
+    } catch (error) {
+      console.error("Error rejecting the request", error);
+    }
   };
 
-  const handleAccept = (id) => {
-    // Xử lý logic chấp nhận ở đây
-    console.log("Yêu cầu đã được chấp nhận:", id);
+  const handleAccept = async (id) => {
+    try {
+      await requestApi.approveRequest(id);
+      fetchRequests(); // Refresh the list after acceptance
+    } catch (error) {
+      console.error("Error approving the request", error);
+    }
   };
 
   return (

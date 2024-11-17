@@ -3,10 +3,6 @@ import axios from "axios";
 const API_URL = "https://65a14790600f49256fb15464.mockapi.io";
 
 export const recruitmentApi = {
-  /**
-   * Fetch all candidates
-   * @returns {Promise<Array>} List of candidates
-   */
   getCandidates: async () => {
     try {
       const response = await axios.get(`${API_URL}/recruitmentApi`);
@@ -17,11 +13,6 @@ export const recruitmentApi = {
     }
   },
 
-  /**
-   * Fetch a single candidate by ID
-   * @param {string} candidateId - The ID of the candidate
-   * @returns {Promise<Object>} Candidate details
-   */
   getCandidateById: async (candidateId) => {
     try {
       const response = await axios.get(
@@ -52,12 +43,6 @@ export const recruitmentApi = {
     }
   },
 
-  /**
-   * Update an existing candidate
-   * @param {string} candidateId - The ID of the candidate
-   * @param {Object} candidateData - The updated candidate data
-   * @returns {Promise<Object>} The updated candidate
-   */
   updateCandidate: async (candidateId, candidateData) => {
     try {
       const response = await axios.put(
