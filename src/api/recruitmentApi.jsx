@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "https://65a14790600f49256fb15464.mockapi.io";
 const API_NAME = "recruitmentApi";
+
 export const recruitmentApi = {
   getCandidates: async () => {
     try {

@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://67395695a3a36b5a62ee66ad.mockapi.io"; // MockAPI Base URL
+const API_NAME = "reportApi";
 
 const reportApi = {
   // Lấy danh sách yêu cầu với phân trang và bộ lọc
   getAllRequests: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/reportApi`);
+      const response = await axios.get(`${API_BASE_URL}/${API_NAME}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching all requests:", error);
@@ -17,7 +18,7 @@ const reportApi = {
   // Lấy chi tiết một yêu cầu theo ID
   getRequestById: async (id) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/reportApi/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`);
       return response.data;
     } catch (error) {
       console.error(`Error fetching request by ID (${id}):`, error);
@@ -28,7 +29,7 @@ const reportApi = {
   // Duyệt yêu cầu
   approveRequest: async (id) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/reportApi/${id}`, {
+      const response = await axios.put(`${API_BASE_URL}/${API_NAME}/${id}`, {
         status: "Approved",
         managerApproved: true,
       });
@@ -42,7 +43,7 @@ const reportApi = {
   // Từ chối yêu cầu với lý do
   rejectRequest: async (id, reason) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/reportApi/${id}`, {
+      const response = await axios.put(`${API_BASE_URL}/${API_NAME}/${id}`, {
         status: "Rejected",
         managerApproved: false,
         reason,
