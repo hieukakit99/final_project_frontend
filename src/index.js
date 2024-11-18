@@ -16,24 +16,42 @@ import EditClass from "./components/TrainingManagement/EditTrainingClass/EditCla
 import RequestManager from "./components/RequestManager/RequestManager";
 import ReportManager from "./components/ReportManager/ReportManager";
 import RecruitmentCreate from "./components/RecuitmentManagement/RecruitmentCreate/RecruitmentCreate";
-
+import EmployeeList from "./components/EmployeeManage/EmployeeList";
+import EmployeeDetails from "./components/EmployeeManage/EmployeeDetails";
+import EmployeeEdit from './components/EmployeeManage/EmployeeEdit'
+import AddEmployee from "./components/EmployeeManage/AddEmployee";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LayoutRoot />,
+    element: (
+  
+        <LayoutRoot />
+
+    ),
     children: [
       {
         index: true,
         element: <App />,
       },
       {
-        path: "/users",
+        path: "/users/:id",
         element: <UserList />,
       },
-
       {
         path: "/recruitments",
         element: <RecruitmentList />,
+      },
+      {
+        path: "/employee-profile",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employee-details/:id",
+        element: <EmployeeDetails />,
+      },
+      {
+        path: "/edit-employee/:id",
+        element: <EmployeeEdit />,
       },
       {
         path: "/recruitments/create",
@@ -63,6 +81,11 @@ const router = createBrowserRouter([
         path: "/reports",
         element: <ReportManager />,
       },
+      {
+        path: "/add-employee",
+        element: <AddEmployee />,
+      },
+      
     ],
   },
   {
@@ -70,6 +93,7 @@ const router = createBrowserRouter([
     element: <SignIn />,
   },
 ]);
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
