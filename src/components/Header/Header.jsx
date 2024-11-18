@@ -1,32 +1,40 @@
-import ArrowRight from "../Icons/ArrowRight";
-import Logo from "../Icons/Logo";
-import style from "./header.module.scss";
 import { Link } from "react-router-dom";
-
+import ArrowRight from "../Icons/ArrowRight";
+import style from "./header.module.scss";
+import HousePlus from "../Icons/HousePlus";
 const Header = () => {
   const classes = {
     headerContainer: `${style.header__container}`,
     headerContent: `${style.header__content}`,
-    headerIcon: `${style.header__icon}`,
+    headerBrand: `${style.header__brand}`,
+    headerTitle: `${style.header__title}`,
+    headerActions: `${style.header__actions}`,
     headerBtn: `${style.header__btn}`,
+    headerBtnText: `${style.header__btn_text}`,
+    headerIcon: `${style.header__icon}`,
+    headerBtnIcon: `${style.header__btn_icon}`,
   };
 
   return (
-    <div className={classes.headerContainer}>
+    <header className={classes.headerContainer}>
       <div className={classes.headerContent}>
-        <Link to="/" className={classes.headerIcon}>
-          <Logo />
+        <Link to="/" className={classes.headerBrand}>
+          <span className={classes.headerIcon}>
+            <HousePlus />
+          </span>
+          <h1 className={classes.headerTitle}>Quản Lý Nhân Sự</h1>
         </Link>
-        <div>
+        <div className={classes.headerActions}>
           <Link to="/sign-in" className={classes.headerBtn}>
-            <span>Logout</span>
-            <span>
+            <span className={classes.headerBtnText}>Logout</span>
+            <span className={classes.headerBtnIcon}>
               <ArrowRight />
             </span>
           </Link>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
+
 export default Header;

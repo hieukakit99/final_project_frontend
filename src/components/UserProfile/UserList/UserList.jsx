@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { userApi } from "../../../api/userApi"; // Import userApi service
 import styles from "./user-list.module.scss";
 
 const UserList = () => {
+  // Initial state for userData
   const [userData, setUserData] = useState({
-    id: "123456",
-    fullName: "Nguyen Van A",
+    id: "",
+    fullName: "",
     taxId: "",
     email: "",
     gender: "",
@@ -16,10 +18,45 @@ const UserList = () => {
     skill: "",
     country: "Việt Nam",
     city: "",
-    points: 34,
-    expireDate: "24/10/2023 18:07",
-    postedAds: 1551,
+    points: 0,
+    expireDate: "",
+    postedAds: 0,
   });
+
+  const [loading, setLoading] = useState(true); // For loading state
+  const [error, setError] = useState(null); // For error handling
+
+  // Fetch user data when the component mounts
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const users = await userApi.getUsers(); // Fetch the list of users from API
+        if (users.length > 0) {
+          setUserData(users[0]); // Assuming we want to display the first user
+        } else {
+          setError("No users found.");
+        }
+      } catch (error) {
+        setError("Failed to fetch user data.");
+      } finally {
+        setLoading(false); // Stop loading after fetching is done
+      }
+    };
+
+    fetchUserData(); // Call the fetch function
+  }, []);
+
+  const validateForm = () => {
+    if (!userData.fullName.trim()) {
+      alert("Full Name is required.");
+      return false;
+    }
+    if (!userData.email.includes("@")) {
+      alert("Enter a valid email address.");
+      return false;
+    }
+    return true;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,8 +68,19 @@ const UserList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form data:", userData);
+    if (validateForm()) {
+      console.log("Form data:", userData);
+    }
   };
+
+  // Display loading or error message if needed
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className={styles.userManagement}>
@@ -65,21 +113,19 @@ const UserList = () => {
                   name="fullName"
                   value={userData.fullName}
                   onChange={handleChange}
-                  placeholder="Nguyễn Thị Huyền Trân"
+                  disabled
                 />
               </div>
 
               <div className={styles.info__formGroup}>
                 <label className={styles.info_label}>Giới tính</label>
-                <select
+                <input
                   className={styles.select}
                   name="gender"
                   value={userData.gender}
                   onChange={handleChange}
-                >
-                  <option value="">Nam</option>
-                  <option value="tech">Nữ</option>
-                </select>
+                  disabled
+                />
               </div>
             </div>
 
@@ -92,6 +138,7 @@ const UserList = () => {
                   name="phone"
                   value={userData.phone}
                   onChange={handleChange}
+                  disabled
                 />
               </div>
 
