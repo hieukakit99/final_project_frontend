@@ -5,7 +5,7 @@ import reportApi from "../../api/reportApi";
 import style from "./report-manager.module.scss";
 
 const ReportManager = () => {
-  const [requests, setRequests] = useState([]);
+  const [reports, setReports] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [showRejectModal, setShowRejectModal] = useState(false);
@@ -13,7 +13,7 @@ const ReportManager = () => {
   const [selectedRequestId, setSelectedRequestId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [pageSize] = useState(5);
+  const pageSize = 5;
 
   const fetchRequests = async () => {
     setLoading(true);
@@ -25,23 +25,34 @@ const ReportManager = () => {
       });
 
       if (Array.isArray(response)) {
-        setRequests(
-          response.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+        setReports(
+          response
+            .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+            .map((req) => ({
+              ...req,
+              isAccepted: false,
+              isRejected: false,
+            }))
         );
         setTotalItems(response.length);
       } else if (response && response.data) {
-        setRequests(response.data);
-        // Sử dụng total từ response API nếu có
+        setReports(
+          response.data.map((req) => ({
+            ...req,
+            isAccepted: false,
+            isRejected: false,
+          }))
+        );
         setTotalItems(response.total || response.data.length);
       } else {
-        setRequests([]);
+        setReports([]);
         setTotalItems(0);
         setError("Invalid data format received from server");
       }
     } catch (error) {
       console.error("API Error:", error);
-      setError("Failed to fetch requests. Please try again later.");
-      setRequests([]);
+      setError("Failed to fetch reports. Please try again later.");
+      setReports([]);
       setTotalItems(0);
     } finally {
       setLoading(false);
@@ -50,7 +61,7 @@ const ReportManager = () => {
 
   useEffect(() => {
     fetchRequests();
-  }, [currentPage, pageSize]);
+  }, [currentPage]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -64,8 +75,13 @@ const ReportManager = () => {
   const handleConfirmReject = async () => {
     try {
       await reportApi.rejectRequest(selectedRequestId, rejectReason);
-      alert("Request rejected successfully.");
-      fetchRequests();
+      setReports((prevRequests) =>
+        prevRequests.map((req) =>
+          req.id === selectedRequestId
+            ? { ...req, isRejected: true, isAccepted: false }
+            : req
+        )
+      );
       setShowRejectModal(false);
       setRejectReason("");
     } catch (error) {
@@ -76,21 +92,19 @@ const ReportManager = () => {
   const handleAccept = async (id) => {
     try {
       await reportApi.approveRequest(id);
-      alert("Request approved successfully.");
-      fetchRequests();
+      setReports((prevRequests) =>
+        prevRequests.map((req) =>
+          req.id === id ? { ...req, isAccepted: true, isRejected: false } : req
+        )
+      );
     } catch (error) {
       alert("Failed to approve the request.");
     }
   };
 
-  // Tính tổng số trang dựa trên tổng số items
   const totalPages = Math.ceil(totalItems / pageSize);
 
-  // Tạo mảng số trang để hiển thị
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <div className={style.container}>
@@ -99,7 +113,7 @@ const ReportManager = () => {
         <p>Loading...</p>
       ) : error ? (
         <p className="text-danger">{error}</p>
-      ) : requests.length === 0 ? (
+      ) : reports.length === 0 ? (
         <p>Không có dữ liệu</p>
       ) : (
         <>
@@ -115,7 +129,7 @@ const ReportManager = () => {
               </tr>
             </thead>
             <tbody>
-              {requests.map((item) => (
+              {reports.map((item) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.employee}</td>
@@ -123,18 +137,24 @@ const ReportManager = () => {
                   <td>{item.details}</td>
                   <td>{moment(item.createdAt).format("YYYY-MM-DD")}</td>
                   <td>
-                    <button
-                      className={style.btnAccept}
-                      onClick={() => handleAccept(item.id)}
-                    >
-                      Chấp nhận
-                    </button>
-                    <button
-                      className={style.btnDecline}
-                      onClick={() => handleReject(item.id)}
-                    >
-                      Từ chối
-                    </button>
+                    {!item.isRejected && (
+                      <button
+                        className={style.btnAccept}
+                        onClick={() => handleAccept(item.id)}
+                        disabled={item.isAccepted}
+                      >
+                        Chấp nhận
+                      </button>
+                    )}
+                    {!item.isAccepted && (
+                      <button
+                        className={style.btnDecline}
+                        onClick={() => handleReject(item.id)}
+                        disabled={item.isRejected}
+                      >
+                        Từ chối
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -193,7 +213,11 @@ const ReportManager = () => {
           <Button variant="secondary" onClick={() => setShowRejectModal(false)}>
             Hủy
           </Button>
-          <Button variant="primary" onClick={handleConfirmReject}>
+          <Button
+            variant="primary"
+            onClick={handleConfirmReject}
+            disabled={!rejectReason.trim()}
+          >
             Xác nhận từ chối
           </Button>
         </Modal.Footer>
