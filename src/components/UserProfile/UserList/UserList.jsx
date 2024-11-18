@@ -12,12 +12,13 @@ const UserList = () => {
     email: "",
     gender: "",
     phone: "",
+    birthDate: "",
     department: "",
     position: "",
-    company: "",
+    address: "",
     skill: "",
     country: "Việt Nam",
-    city: "",
+    department: "",
     points: 0,
     expireDate: "",
     postedAds: 0,
@@ -26,7 +27,6 @@ const UserList = () => {
   const [loading, setLoading] = useState(true); // For loading state
   const [error, setError] = useState(null); // For error handling
 
-  // Fetch user data when the component mounts
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -90,18 +90,29 @@ const UserList = () => {
           <form className={styles.info__form} onSubmit={handleSubmit}>
             <h2 className={styles.info__title}>Thông tin cá nhân</h2>
 
-            <div className={styles.info__formGroup}>
-              <label className={styles.info_label}>
-                ID (là trường bắt buộc)
-              </label>
-              <input
-                className={styles.input}
-                type="text"
-                name="id"
-                value={userData.id}
-                onChange={handleChange}
-                disabled
-              />
+            <div className={styles.info__row}>
+              <div className={styles.info__formGroup}>
+                <label className={styles.info_label}>ID:</label>
+                <input
+                  className={styles.input}
+                  type="text"
+                  name="id"
+                  value={userData.id}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
+              <div className={styles.info__formGroup}>
+                <label className={styles.info_label}>CCCD:</label>
+                <input
+                  className={styles.input}
+                  type="taxId"
+                  name="taxId"
+                  value={userData.taxId}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
             </div>
 
             <div className={styles.info__row}>
@@ -131,6 +142,17 @@ const UserList = () => {
 
             <div className={styles.info__row}>
               <div className={styles.info__formGroup}>
+                <label className={styles.info_label}>Ngày sinh</label>
+                <input
+                  className={styles.input}
+                  type="tel"
+                  name="birthDate"
+                  value={userData.birthDate}
+                  onChange={handleChange}
+                  disabled
+                />
+              </div>
+              <div className={styles.info__formGroup}>
                 <label className={styles.info_label}>Số điện thoại</label>
                 <input
                   className={styles.input}
@@ -140,21 +162,6 @@ const UserList = () => {
                   onChange={handleChange}
                   disabled
                 />
-              </div>
-
-              <div className={styles.info__formGroup}>
-                <label className={styles.info_label}>Kĩ năng</label>
-                <select
-                  className={styles.select}
-                  name="skill"
-                  value={userData.skill}
-                  onChange={handleChange}
-                >
-                  <option value="">Java</option>
-                  <option value="tech">C#</option>
-                  <option value="finance">Python</option>
-                  <option value="education">.NET</option>
-                </select>
               </div>
             </div>
             <div className={styles.info__formGroup}>
@@ -169,14 +176,41 @@ const UserList = () => {
             </div>
 
             <div className={styles.info__formGroup}>
-              <label className={styles.info_label}>Công ty</label>
+              <label className={styles.info_label}>Địa chỉ</label>
               <input
                 className={styles.input}
                 type="text"
-                name="company"
-                value={userData.company}
+                name="address"
+                value={userData.address}
                 onChange={handleChange}
               />
+            </div>
+            <div className={styles.info__formGroup}>
+              <label className={styles.info_label}>Kĩ năng</label>
+              <select
+                className={styles.select}
+                name="skill"
+                value={userData.skill}
+                onChange={handleChange}
+              >
+                <option value="">Java</option>
+                <option value="tech">C#</option>
+                <option value="finance">Python</option>
+                <option value="education">.NET</option>
+              </select>
+            </div>
+            <div className={styles.info__formGroup}>
+              <label className={styles.info_label}>Phòng ban</label>
+              <select
+                className={styles.select}
+                name="department"
+                value={userData.department}
+                onChange={handleChange}
+              >
+                <option value="hanoi">Nhân sự</option>
+                <option value="hcm">Hỗ trợ</option>
+                <option value="danang">Quản lý</option>
+              </select>
             </div>
 
             <div className={styles.info__formGroup}>
@@ -188,21 +222,6 @@ const UserList = () => {
                 onChange={handleChange}
               >
                 <option value="Việt Nam">Việt Nam</option>
-              </select>
-            </div>
-
-            <div className={styles.info__formGroup}>
-              <label className={styles.info_label}>Tỉnh/thành phố</label>
-              <select
-                className={styles.select}
-                name="city"
-                value={userData.city}
-                onChange={handleChange}
-              >
-                <option value="">Chọn tỉnh/thành phố</option>
-                <option value="hanoi">Hà Nội</option>
-                <option value="hcm">TP. Hồ Chí Minh</option>
-                <option value="danang">Đà Nẵng</option>
               </select>
             </div>
 
@@ -238,7 +257,7 @@ const UserList = () => {
               </p>
             </div>
 
-            <div className={styles.statsGrid}>
+            {/* <div className={styles.statsGrid}>
               <div className={styles.statItem}>
                 <span className={styles.statLabel}>Tin đăng ký</span>
                 <span className={styles.statValue}>Không giới hạn</span>
@@ -251,7 +270,7 @@ const UserList = () => {
                 <span className={styles.statLabel}>Tin còn lại</span>
                 <span className={styles.statValue}>Không giới hạn</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
