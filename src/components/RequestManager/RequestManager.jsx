@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./request-manager.module.scss";
 import { Pagination, Modal, Button, Form } from "react-bootstrap";
 import moment from "moment";
-import requestApi from "../../api/requestApi"; // Import the API module
+import requestApi from "../../api/requestApi";
 
 const RequestManager = () => {
   const [requests, setRequests] = useState([]);
@@ -15,7 +15,12 @@ const RequestManager = () => {
   const fetchRequests = async () => {
     try {
       const data = await requestApi.getAllRequests(currentPage, pageSize);
-      setRequests(data);
+      const updatedRequests = data.map((req) => ({
+        ...req,
+        isAccepted: false,
+        isRejected: false,
+      }));
+      setRequests(updatedRequests);
     } catch (error) {
       console.error("Failed to fetch requests", error);
     }
@@ -37,21 +42,33 @@ const RequestManager = () => {
     setShowRejectModal(true);
   };
 
+  // Xác nhận từ chối
   const handleConfirmReject = async () => {
     try {
       await requestApi.rejectRequest(selectedRequestId, rejectReason);
+      setRequests((prevRequests) =>
+        prevRequests.map((req) =>
+          req.id === selectedRequestId
+            ? { ...req, isRejected: true, isAccepted: false }
+            : req
+        )
+      );
       setShowRejectModal(false);
       setRejectReason("");
-      fetchRequests(); // Refresh the list after rejection
     } catch (error) {
       console.error("Error rejecting the request", error);
     }
   };
 
+  // Nút đồng ý
   const handleAccept = async (id) => {
     try {
       await requestApi.approveRequest(id);
-      fetchRequests(); // Refresh the list after acceptance
+      setRequests((prevRequests) =>
+        prevRequests.map((req) =>
+          req.id === id ? { ...req, isAccepted: true, isRejected: false } : req
+        )
+      );
     } catch (error) {
       console.error("Error approving the request", error);
     }
@@ -82,18 +99,22 @@ const RequestManager = () => {
                 <td>{item.details}</td>
                 <td>{moment(item.createdAt).format("YYYY-MM-DD")}</td>
                 <td>
-                  <button
-                    className={style.btnAccept}
-                    onClick={() => handleAccept(item.id)}
-                  >
-                    Chấp nhận
-                  </button>
-                  <button
-                    className={style.btnDecline}
-                    onClick={() => handleReject(item.id)}
-                  >
-                    Từ chối
-                  </button>
+                  {!item.isRejected && (
+                    <button
+                      className={style.btnAccept}
+                      onClick={() => handleAccept(item.id)}
+                    >
+                      Chấp nhận
+                    </button>
+                  )}
+                  {!item.isAccepted && (
+                    <button
+                      className={style.btnDecline}
+                      onClick={() => handleReject(item.id)}
+                    >
+                      Từ chối
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -151,7 +172,11 @@ const RequestManager = () => {
           <Button variant="secondary" onClick={() => setShowRejectModal(false)}>
             Hủy
           </Button>
-          <Button variant="primary" onClick={handleConfirmReject}>
+          <Button
+            variant="primary"
+            onClick={handleConfirmReject}
+            disabled={!rejectReason.trim()}
+          >
             Xác nhận từ chối
           </Button>
         </Modal.Footer>

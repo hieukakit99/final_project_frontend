@@ -57,6 +57,14 @@ const Dashboard = () => {
           <span className={classes.menuItemIcon}>📘</span>
           <span className={classes.menuItemText}>Quản lý Đào tạo</span>
         </Link>
+        <Link to="/employee-reports" className={classes.menuItem}>
+          <span className={classes.menuItemIcon}>🗓</span>
+          <span className={classes.menuItemText}>Quản lý Báo Cáo</span>
+        </Link>
+        <Link to="/employee-request" className={classes.menuItem}>
+          <span className={classes.menuItemIcon}>🗃</span>
+          <span className={classes.menuItemText}>Quản lý Request</span>
+        </Link>
 
         {/* Approval Dropdown */}
         <div className={classes.menuItem} onClick={toggleApproval}>
