@@ -1,0 +1,20 @@
+.homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #f8f9fa; /* Màu nền hoặc bất kỳ màu nào bạn muốn */
+}
+
+.main-content {
+  background: white; /* Màu nền cho content */
+  padding: 20px; /* Khoảng cách padding */
+  width: 100%; /* Độ rộng của content */
+  height: 100%;
+  text-align: center; /* Căn giữa nội dung */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
