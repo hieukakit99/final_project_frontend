@@ -1,0 +1,202 @@
+/* Container */
+.container {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+}
+
+/* Report Container */
+.reportContainer {
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 550;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+  }
+
+  /* Search Box */
+  .searchBox {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+
+    .searchForm {
+      .searchInput {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .dateRange {
+        display: flex;
+        gap: 45px;
+        margin-top: 10px;
+
+        input {
+          padding: 6px;
+          margin-left: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        select {
+          width: 195px;
+          padding: 9px;
+          margin-left: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  /* Recipient Section */
+  .recipientSection {
+    margin-bottom: 20px;
+
+    .sectionTitle {
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .recipientGroups {
+      display: flex;
+      gap: 20px;
+
+      .group {
+        border: 1px solid #ccc;
+        padding: 10px;
+        min-width: 200px;
+        background-color: #ffffff;
+        border-radius: 8px;
+
+        .groupTitle {
+          margin-bottom: 8px;
+          font-weight: bold;
+          color: #333;
+        }
+
+        label {
+          display: block;
+          margin: 5px 0;
+          font-size: 0.9em;
+
+          input {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  /* Report Table */
+  .reportTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    th,
+    td {
+      border: 1px solid #e0e0e0;
+      padding: 12px;
+      font-family: robotoRegular;
+      text-align: center;
+    }
+
+    th {
+      background-image: linear-gradient(
+        to top,
+        #1e3c72 0%,
+        #1e3c72 1%,
+        #2a5298 100%
+      );
+      color: #ffffff;
+      font-family: robotoRegular;
+    }
+
+    td {
+      color: #333;
+      font-size: 16px;
+    }
+
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+
+    button {
+      margin: 0 5px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &.buttonSend {
+        background: linear-gradient(to bottom, #009999 0%, #00ff99 100%);
+        color: #ffffff;
+
+        &:hover {
+          background: linear-gradient(to bottom, #00cc99 0%, #66ff66 100%);
+        }
+      }
+
+      &.buttonEdit {
+        background: linear-gradient(to bottom, #0000ff 0%, #66ccff 100%);
+        color: #ffffff;
+
+        &:hover {
+          background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+        }
+      }
+      &.buttonDelete {
+        background: linear-gradient(to bottom, #990033 0%, #ff6600 100%);
+        color: #ffffff;
+
+        &:hover {
+          background: linear-gradient(to bottom, #cc0000 0%, #ff9966 100%);
+        }
+      }
+    }
+  }
+
+  /* Footer Buttons */
+  .tableFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .addButton {
+      padding: 8px 16px;
+      background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-image: linear-gradient(to top, #0acffe 0%, #495aff 100%);
+      }
+    }
+  }
+}

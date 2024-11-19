@@ -16,6 +16,9 @@ import EditClass from "./components/TrainingManagement/EditTrainingClass/EditCla
 import RequestManager from "./components/RequestManager/RequestManager";
 import ReportManager from "./components/ReportManager/ReportManager";
 import RecruitmentCreate from "./components/RecuitmentManagement/RecruitmentCreate/RecruitmentCreate";
+import EmployeeReports from "./components/EmployeeReports/EmployeeReports";
+import ReportsEmployeeCreate from "./components/EmployeeReports/ReportsEmployeeCreate/ReportsEmployeeCreate";
+import ReportsEmployeeEdit from "./components/EmployeeReports/ReportsEmployeeEdit/ReportsEmployeeEdit";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +65,18 @@ const router = createBrowserRouter([
       {
         path: "/reports",
         element: <ReportManager />,
+      },
+      {
+        path: "/employee-reports",
+        element: <EmployeeReports />,
+      },
+      {
+        path: "/employee-reports/create",
+        element: <ReportsEmployeeCreate />,
+      },
+      {
+        path: "/employee-reports/edit",
+        element: <ReportsEmployeeEdit />,
       },
     ],
   },
