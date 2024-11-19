@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./reports-employee-create.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"; // You'll need to install axios
 
 const ReportsEmployeeCreate = () => {
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    id: "",
+    title: "",
+    type: "",
+    creator: "",
+    status: "Unfinished",
+    reason: "",
+  });
+
+  const navigate = useNavigate(); // to navigate after saving
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Báo cáo đã được lưu!");
+    try {
+      const response = await axios.post(
+        "https://your-mockapi-url.com/reports", // Replace with your mockapi URL
+        formData
+      );
+      alert("Báo cáo đã được lưu!");
+      navigate.push("/employee-reports"); // Redirect to the reports page after success
+    } catch (err) {
+      console.error(err);
+      alert("Đã có lỗi xảy ra. Vui lòng thử lại!");
+    }
   };
 
   return (
@@ -21,17 +51,29 @@ const ReportsEmployeeCreate = () => {
 
           <div className={styles.formGroup}>
             <label>Mã báo cáo:</label>
-            <input type="text" placeholder="Nhập mã báo cáo" />
+            <input
+              type="text"
+              placeholder="Nhập mã báo cáo"
+              name="id"
+              value={formData.id}
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.formGroup}>
             <label>Tiêu đề báo cáo:</label>
-            <input type="text" placeholder="Nhập tiêu đề báo cáo" />
+            <input
+              type="text"
+              placeholder="Nhập tiêu đề báo cáo"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.formGroup}>
             <label>Loại báo cáo:</label>
-            <select defaultValue="">
+            <select name="type" value={formData.type} onChange={handleChange}>
               <option value="" disabled hidden>
                 Chọn loại báo cáo
               </option>
@@ -43,12 +85,22 @@ const ReportsEmployeeCreate = () => {
 
           <div className={styles.formGroup}>
             <label>Người tạo:</label>
-            <input type="text" placeholder="Nhập tên người tạo" />
+            <input
+              type="text"
+              placeholder="Nhập tên người tạo"
+              name="creator"
+              value={formData.creator}
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.formGroup}>
             <label>Trạng thái:</label>
-            <select defaultValue="Unfinished">
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+            >
               <option value="Unfinished">Chưa xong</option>
               <option value="In Progress">Đang hoàn thành</option>
               <option value="Complete">Hoàn thành</option>
@@ -57,7 +109,12 @@ const ReportsEmployeeCreate = () => {
 
           <div className={styles.formGroup}>
             <label>Nội dung báo cáo:</label>
-            <textarea placeholder="Nhập nội dung báo cáo"></textarea>
+            <textarea
+              placeholder="Nhập nội dung báo cáo"
+              name="reason"
+              value={formData.reason}
+              onChange={handleChange}
+            ></textarea>
           </div>
 
           <div className={styles.buttonGroup}>
