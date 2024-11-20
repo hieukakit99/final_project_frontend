@@ -1,0 +1,30 @@
+
+
+.employee-list {
+    padding: 20px;
+  }
+  
+  .employee-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    background: #f9f9f9;
+  }
+  
+  .employee-card .employee-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .employee-list-container {
+    max-height: 100vh; 
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f9f9f9; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }

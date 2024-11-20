@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./signin.module.scss";
-
-const validAccounts = [
-  { username: "thanh123", password: "123456" },
-  { username: "thanh1234", password: "123456" },
-  { username: "thanh12345", password: "123456" },
-];
+import axios from "axios";
+import { Form } from "react-bootstrap";
 
 const SignIn = () => {
   const [user, setUser] = useState({
@@ -14,19 +10,14 @@ const SignIn = () => {
     password: "",
   });
 
-  const navigate = useNavigate(); // Sử dụng để điều hướng trang sau khi đăng nhập thành công.
-
-  const msgError = {
-    username: "",
-    password: "",
-    invalidAccount: "",
-  };
-
+  const [showPassword, setShowPassword] = useState(false);
   const [messageError, setMessageError] = useState({
     username: "",
     password: "",
     invalidAccount: "",
   });
+
+  const navigate = useNavigate();
 
   const onChangeUserName = (event) => {
     setUser({
@@ -35,70 +26,74 @@ const SignIn = () => {
     });
   };
 
-  function onChangePassword(event) {
+  const onChangePassword = (event) => {
     setUser({
       ...user,
       password: event.target.value,
     });
-  }
+  };
 
-  const handleSignIn = () => {
-    // validate form
-    // Reset error messages
+  const handleSignIn = async () => {
     const msgError = {
       username: "",
       password: "",
       invalidAccount: "",
     };
 
-    if (user.username.trim().length === 0) {
+    // Validate input
+    if (!user.username.trim()) {
       msgError.username = "❌ User name is required";
     }
-    if (user.password.trim().length === 0) {
+    if (!user.password.trim()) {
       msgError.password = "❌ Password is required";
     }
-
     if (msgError.username || msgError.password) {
       setMessageError(msgError);
       return;
     }
 
-    // Kiểm tra xem tài khoản có hợp lệ không
-    const accountValid = validAccounts.find(
-      (acc) => acc.username === user.username && acc.password === user.password
-    );
+    try {
+      // Call API để lấy danh sách user
+      const response = await axios.get(
+        "https://67371888aafa2ef222329aa5.mockapi.io/login"
+      );
+      const users = response.data;
 
-    if (!accountValid) {
-      msgError.invalidAccount = "❌ Incorrect username and password";
-    } else {
-      localStorage.setItem("userToken", "valid-token");
-      setUser({
-        username: "",
-        password: "",
-      });
-      navigate("/"); // Điều hướng về trang chủ
-      return;
+      // Kiểm tra thông tin đăng nhập
+      const accountValid = users.find(
+        (u) => u.username === user.username && u.password === user.password
+      );
+
+      if (!accountValid) {
+        msgError.invalidAccount = "❌ Incorrect username and password";
+        setMessageError(msgError);
+        return;
+      }
+
+      // Nếu đăng nhập thành công
+      localStorage.setItem("userId", accountValid.id); // Lưu id user vào localStorage
+      setUser({ username: "", password: "" });
+      setMessageError({ username: "", password: "", invalidAccount: "" });
+
+      // Điều hướng đến homepage
+      navigate(`/`);
+    } catch (error) {
+      console.error("Lỗi khi gọi API:", error);
+      alert("Đã xảy ra lỗi khi đăng nhập.");
     }
-
-    setMessageError(msgError); // Cập nhật thông báo lỗi
   };
-
-  useEffect(() => {
-    const userToken = localStorage.getItem("userToken");
-    if (!userToken) {
-      navigate("/sign-in");
-    }
-  }, [navigate]);
 
   return (
     <div className={style["sign-in"]}>
       <div className={style["sign-in__container"]}>
         <div className={style["sign-in__heading"]}>Welcome</div>
+
         <div className={style["sign-in__error"]}>
           <p>{messageError.username}</p>
           <p>{messageError.password}</p>
           <p>{messageError.invalidAccount}</p>
         </div>
+
         <div>
           <input
             type="text"
@@ -108,12 +103,22 @@ const SignIn = () => {
             className={style["sign-in__textfield"]}
           />
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
             value={user.password}
             onChange={onChangePassword}
             className={style["sign-in__textfield"]}
           />
+
+          <div controlId="formShowPassword" className="mb-3">
+            <Form.Check
+              type="checkbox"
+              label="Hiện mật khẩu"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+          </div>
+
           <button onClick={handleSignIn} className={style["sign-in__btn"]}>
             Login
           </button>
@@ -122,4 +127,5 @@ const SignIn = () => {
     </div>
   );
 };
+
 export default SignIn;

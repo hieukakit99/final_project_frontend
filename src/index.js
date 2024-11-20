@@ -19,6 +19,10 @@ import RecruitmentCreate from "./components/RecuitmentManagement/RecruitmentCrea
 import EmployeeReports from "./components/EmployeeReports/EmployeeReports";
 import ReportsEmployeeCreate from "./components/EmployeeReports/ReportsEmployeeCreate/ReportsEmployeeCreate";
 import ReportsEmployeeEdit from "./components/EmployeeReports/ReportsEmployeeEdit/ReportsEmployeeEdit";
+import EmployeeList from "./components/EmployeeManage/EmployeeList";
+import EmployeeDetails from "./components/EmployeeManage/EmployeeDetails";
+import EmployeeEdit from "./components/EmployeeManage/EmployeeEdit";
+import AddEmployee from "./components/EmployeeManage/AddEmployee";
 
 const router = createBrowserRouter([
   {
@@ -33,10 +37,21 @@ const router = createBrowserRouter([
         path: "/users",
         element: <UserList />,
       },
-
       {
         path: "/recruitments",
         element: <RecruitmentList />,
+      },
+      {
+        path: "/employee-profile",
+        element: <EmployeeList />,
+      },
+      {
+        path: "/employee-details/:id",
+        element: <EmployeeDetails />,
+      },
+      {
+        path: "/edit-employee/:id",
+        element: <EmployeeEdit />,
       },
       {
         path: "/recruitments/create",
@@ -77,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: "/employee-reports/:id",
         element: <ReportsEmployeeEdit />,
+      },
+      {
+        path: "/add-employee",
+        element: <AddEmployee />,
       },
     ],
   },
