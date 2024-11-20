@@ -14,11 +14,6 @@ const reportEmployeeApi = {
     }
   },
 
-  /**
-   * Lấy chi tiết một báo cáo theo ID.
-   * @param {string} id - ID của báo cáo.
-   * @returns {Promise<Object>} - Dữ liệu chi tiết báo cáo.
-   */
   getReportById: async (id) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`);
@@ -32,11 +27,6 @@ const reportEmployeeApi = {
     }
   },
 
-  /**
-   * Tạo mới một báo cáo.
-   * @param {object} data - Dữ liệu báo cáo cần tạo.
-   * @returns {Promise<Object>} - Dữ liệu báo cáo vừa tạo.
-   */
   createReport: async (data) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/${API_NAME}`, data);
@@ -47,12 +37,6 @@ const reportEmployeeApi = {
     }
   },
 
-  /**
-   * Cập nhật một báo cáo theo ID.
-   * @param {string} id - ID của báo cáo.
-   * @param {object} data - Dữ liệu cập nhật cho báo cáo.
-   * @returns {Promise<Object>} - Dữ liệu báo cáo đã cập nhật.
-   */
   updateReport: async (id, data) => {
     try {
       const response = await axios.put(
@@ -69,11 +53,6 @@ const reportEmployeeApi = {
     }
   },
 
-  /**
-   * Xóa một báo cáo theo ID.
-   * @param {string} id - ID của báo cáo cần xóa.
-   * @returns {Promise<void>} - Xác nhận xóa thành công.
-   */
   deleteReport: async (id) => {
     try {
       await axios.delete(`${API_BASE_URL}/${API_NAME}/${id}`);
@@ -88,3 +67,15 @@ const reportEmployeeApi = {
 };
 
 export default reportEmployeeApi;
+
+export const REPORT_TYPES = {
+  EVALUATION: "evaluation",
+  RECRUITMENT: "recruitment",
+  TRAINING: "training",
+};
+
+export const REPORT_STATUSES = {
+  UNFINISHED: "Unfinished",
+  IN_PROGRESS: "In Progress",
+  COMPLETE: "Complete",
+};
