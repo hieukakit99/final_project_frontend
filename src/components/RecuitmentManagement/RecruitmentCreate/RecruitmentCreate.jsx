@@ -19,7 +19,6 @@ const RecruitmentCreate = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log(name, value); // Log giá trị để kiểm tra
   };
 
   const handleSave = async () => {
