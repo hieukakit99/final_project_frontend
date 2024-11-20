@@ -7,7 +7,8 @@ import UserList from "../UserProfile/UserList/UserList";
 
 const Dashboard = () => {
   const [isApprovalOpen, setIsApprovalOpen] = useState(false); // State to control dropdown visibility
-
+  const userStorage = localStorage.getItem("user");
+  const user = userStorage ? JSON.parse(userStorage) : {};
   const classes = {
     dashboardContainer: `${style.dashboard__container}`,
     header: `${style.dashboard__header}`,
@@ -67,11 +68,13 @@ const Dashboard = () => {
         </Link>
 
         {/* Approval Dropdown */}
-        <div className={classes.menuItem} onClick={toggleApproval}>
-          <span className={classes.menuItemIcon}>✅</span>
-          <span className={classes.menuItemText}>Approval</span>
-          <TriangleDown />
-        </div>
+        {user.role === "ADMIN" && (
+          <div className={classes.menuItem} onClick={toggleApproval}>
+            <span className={classes.menuItemIcon}>✅</span>
+            <span className={classes.menuItemText}>Approval</span>
+            <TriangleDown />
+          </div>
+        )}
         {isApprovalOpen && (
           <div className={classes.approvalDropdown}>
             <Link to="/reports" className={classes.menuItem}>

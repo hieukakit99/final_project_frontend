@@ -23,11 +23,16 @@ import EmployeeList from "./components/EmployeeManage/EmployeeList";
 import EmployeeDetails from "./components/EmployeeManage/EmployeeDetails";
 import EmployeeEdit from "./components/EmployeeManage/EmployeeEdit";
 import AddEmployee from "./components/EmployeeManage/AddEmployee";
+import AuthLayout from "./layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LayoutRoot />,
+    element: (
+      <AuthLayout>
+        <LayoutRoot />
+      </AuthLayout>
+    ),
     children: [
       {
         index: true,
@@ -101,7 +106,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/sign-in",
-    element: <SignIn />,
+    element: (
+      <AuthLayout isPublic>
+        <SignIn />
+      </AuthLayout>
+    ),
   },
 ]);
 

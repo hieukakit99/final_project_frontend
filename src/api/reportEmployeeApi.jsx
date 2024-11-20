@@ -1,12 +1,11 @@
-import axios from "axios";
+import api from "./apiClient";
 
-const API_BASE_URL = "https://673a01a7a3a36b5a62f06bdb.mockapi.io"; // MockAPI Base URL
-const API_NAME = "reportEmployeeApi";
+const API_NAME = "workreports";
 
 const reportEmployeeApi = {
   getAllReports: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/${API_NAME}`);
+      const response = await api.get(`${API_NAME}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching reports:", error.response?.data || error);
@@ -16,7 +15,7 @@ const reportEmployeeApi = {
 
   getReportById: async (id) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`);
+      const response = await api.get(`${API_NAME}/${id}`);
       return response.data;
     } catch (error) {
       console.error(
@@ -29,7 +28,7 @@ const reportEmployeeApi = {
 
   createReport: async (data) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/${API_NAME}`, data);
+      const response = await api.post(`${API_NAME}/create`, data);
       return response.data;
     } catch (error) {
       console.error("Error creating report:", error.response?.data || error);
@@ -39,10 +38,7 @@ const reportEmployeeApi = {
 
   updateReport: async (id, data) => {
     try {
-      const response = await axios.put(
-        `${API_BASE_URL}/${API_NAME}/${id}`,
-        data
-      );
+      const response = await api.put(`${API_NAME}/update/${id}`, data);
       return response.data;
     } catch (error) {
       console.error(
@@ -55,7 +51,7 @@ const reportEmployeeApi = {
 
   deleteReport: async (id) => {
     try {
-      await axios.delete(`${API_BASE_URL}/${API_NAME}/${id}`);
+      await api.delete(`${API_NAME}/${id}`);
     } catch (error) {
       console.error(
         `Error deleting report ID (${id}):`,

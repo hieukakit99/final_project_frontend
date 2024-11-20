@@ -1,18 +1,26 @@
-import React, {useState,useEffect} from 'react';
-import { Container, Row, Col, Navbar, Nav, Button, Pagination } from 'react-bootstrap';
-import './Homepage.css';
-import NotificationList from './NotificationList';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Navbar,
+  Nav,
+  Button,
+  Pagination,
+} from "react-bootstrap";
+import "./Homepage.css";
+import NotificationList from "./NotificationList";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const Homepage = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState(null);
   const handleLogout = () => {
-    localStorage.removeItem('userId');
-    navigate("/")
-  }
+    localStorage.removeItem("user");
+    navigate("/");
+  };
   const notifications = [
     {
       sender: "Hệ thống",
@@ -26,29 +34,25 @@ const Homepage = () => {
       content: "Công ty sẽ nghỉ lễ từ ngày 25/12 đến 01/01.",
       time: "10 thg 11",
     },
-  ]
+  ];
 
   useEffect(() => {
-
-
-      axios
-      .get(`https://67371888aafa2ef222329aa5.mockapi.io/login/${id}`) 
+    axios
+      .get(`https://67371888aafa2ef222329aa5.mockapi.io/login/${id}`)
       .then((response) => setUserData(response.data))
-      .catch((error) => console.error('Error fetching user data:', error));
+      .catch((error) => console.error("Error fetching user data:", error));
   }, [id]);
 
   return (
     <div className="homepage">
-
-
       {/* Main Content */}
       <Container fluid className="main-content">
         <Row>
-          <Col >
+          <Col>
             {/* Content Area */}
             <div className="main-content">
-                <h2>News</h2>
-                <NotificationList notifications={notifications} />
+              <h2>News</h2>
+              <NotificationList notifications={notifications} />
             </div>
 
             {/* Pagination */}
@@ -63,8 +67,6 @@ const Homepage = () => {
                 <Pagination.Next />
               </Pagination>
             </div>
-
-            
           </Col>
         </Row>
       </Container>
