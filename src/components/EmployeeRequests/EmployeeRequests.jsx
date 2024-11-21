@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Pagination, Modal } from "react-bootstrap";
 import reportEmployeeApi from "../../api/reportEmployeeApi";
 import { REPORT_TYPES } from "../../api/reportEmployeeApi";
-import styles from "./employee-reports.module.scss";
+import styles from "./employee-requests.module.scss";
 
 const EmployeeRequests = () => {
   const [state, setState] = useState({
