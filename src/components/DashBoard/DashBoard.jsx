@@ -41,13 +41,6 @@ const Dashboard = () => {
           <span className={classes.menuItemText}>Quản lý Hồ Sơ Nhân Viên</span>
         </Link>
 
-        <Link to="/work-process" className={classes.menuItem}>
-          <span className={classes.menuItemIcon}>📈</span>
-          <span className={classes.menuItemText}>
-            Quản lý Quá Trình Làm Việc
-          </span>
-        </Link>
-
         <Link to="/recruitments" className={classes.menuItem}>
           <span className={classes.menuItemIcon}>📚</span>
           <span className={classes.menuItemText}>Quản lý Tuyển dụng</span>

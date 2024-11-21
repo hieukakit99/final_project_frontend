@@ -1,8 +1,11 @@
-import Homepage from "./components/Menu/Homepage";
+import TaskEvaluation from "./components/TaskEvaluation/TaskEvaluation";
+
 function App() {
-  return <div>
-    <Homepage/>
-  </div>;
+  return (
+    <div>
+      <TaskEvaluation />
+    </div>
+  );
 }
 
 export default App;

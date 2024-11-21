@@ -47,11 +47,6 @@ export const trainingApi = {
     }
   },
 
-  /**
-   * Delete a training class by ID
-   * @param {string} trainingId - The ID of the training to delete
-   * @returns {Promise<Object>} Response from the API
-   */
   deleteTraining: async (trainingId) => {
     try {
       const response = await axios.delete(
