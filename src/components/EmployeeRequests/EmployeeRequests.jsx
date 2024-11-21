@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Modal } from "react-bootstrap";
-import reportEmployeeApi from "../../api/reportEmployeeApi";
-import { REPORT_TYPES } from "../../api/reportEmployeeApi";
+import { REPORT_TYPES } from "../../api/requestEmployeeApi";
 import styles from "./employee-requests.module.scss";
+import requestEmployeeApi from "../../api/requestEmployeeApi";
 
 const EmployeeRequests = () => {
   const [state, setState] = useState({
     currentPage: 1,
-    reports: [],
-    totalReports: 0,
+    requests: [],
+    totalRequests: 0,
     loading: false,
     error: null,
     search: "",
     startDate: "",
     endDate: "",
-    reportType: "",
+    requestType: "",
     pageSize: 5,
     showModal: false,
-    selectedReport: null,
+    selectedRequest: null,
   });
 
-  const fetchReports = useCallback(async () => {
+  const fetchRequests = useCallback(async () => {
     setState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const params = {
@@ -30,19 +30,19 @@ const EmployeeRequests = () => {
         search: state.search,
         startDate: state.startDate,
         endDate: state.endDate,
-        reportType: state.reportType,
+        requestType: state.requestType,
       };
-      const data = await reportEmployeeApi.getAllReports(params);
+      const data = await requestEmployeeApi.getAllRequests(params);
       setState((prev) => ({
         ...prev,
-        reports: data,
-        totalReports: data.length,
+        requests: data,
+        totalRequests: data.length,
         loading: false,
       }));
     } catch (error) {
       setState((prev) => ({
         ...prev,
-        error: "Không thể tải danh sách báo cáo",
+        error: "Không thể tải danh sách request",
         loading: false,
       }));
     }
@@ -52,53 +52,53 @@ const EmployeeRequests = () => {
     state.search,
     state.startDate,
     state.endDate,
-    state.reportType,
+    state.requestType,
   ]);
 
   useEffect(() => {
-    fetchReports();
-  }, [fetchReports]);
+    fetchRequests();
+  }, [fetchRequests]);
 
-  const handleDeleteReport = async () => {
-    if (!state.selectedReport) return;
+  const handleDeleteRequest = async () => {
+    if (!state.selectedRequest) return;
 
     try {
-      await reportEmployeeApi.deleteReport(state.selectedReport.id);
+      await requestEmployeeApi.deleteRequest(state.selectedRequest.id);
       setState((prev) => ({
         ...prev,
-        reports: prev.reports.filter(
-          (report) => report.id !== prev.selectedReport.id
+        requests: prev.requests.filter(
+          (request) => request.id !== prev.selectedRequest.id
         ),
         showModal: false,
-        selectedReport: null,
+        selectedRequest: null,
       }));
-      alert("Xóa báo cáo thành công!");
+      alert("Xóa request thành công!");
     } catch (error) {
-      alert(error.message || "Không thể xóa báo cáo. Vui lòng thử lại!");
+      alert(error.message || "Không thể xóa request. Vui lòng thử lại!");
     }
   };
 
   const pageCount = useMemo(() => {
-    return Math.ceil(state.totalReports / state.pageSize);
-  }, [state.totalReports, state.pageSize]);
+    return Math.ceil(state.totalRequests / state.pageSize);
+  }, [state.totalRequests, state.pageSize]);
 
-  const currentReports = useMemo(() => {
+  const currentRequests = useMemo(() => {
     const start = (state.currentPage - 1) * state.pageSize;
     const end = start + state.pageSize;
-    return state.reports.slice(start, end);
-  }, [state.reports, state.currentPage, state.pageSize]);
+    return state.requests.slice(start, end);
+  }, [state.requests, state.currentPage, state.pageSize]);
 
   return (
     <div className={styles.container}>
       <div className={styles.mainContent}>
-        <div className={styles.reportContainer}>
-          <h2>Danh Sách Báo Cáo Nhân Sự</h2>
+        <div className={styles.requestContainer}>
+          <h2>Danh Sách Request</h2>
 
           <div className={styles.searchBox}>
             <div className={styles.searchForm}>
               <input
                 type="text"
-                placeholder="Tìm kiếm báo cáo..."
+                placeholder="Tìm kiếm request..."
                 value={state.search}
                 onChange={(e) =>
                   setState((prev) => ({ ...prev, search: e.target.value }))
@@ -131,13 +131,13 @@ const EmployeeRequests = () => {
                   />
                 </div>
                 <div>
-                  <span>Loại báo cáo:</span>
+                  <span>Loại request:</span>
                   <select
-                    value={state.reportType}
+                    value={state.requestType}
                     onChange={(e) =>
                       setState((prev) => ({
                         ...prev,
-                        reportType: e.target.value,
+                        requestType: e.target.value,
                       }))
                     }
                   >
@@ -153,12 +153,12 @@ const EmployeeRequests = () => {
 
           {state.error && <div className={styles.error}>{state.error}</div>}
 
-          <table className={styles.reportTable}>
+          <table className={styles.requestTable}>
             <thead>
               <tr>
-                <th>Mã báo cáo</th>
+                <th>Mã request</th>
                 <th>Tiêu đề</th>
-                <th>Loại báo cáo</th>
+                <th>Loại request</th>
                 <th>Ngày tạo</th>
                 <th>Người tạo</th>
                 <th>Trạng thái</th>
@@ -172,23 +172,23 @@ const EmployeeRequests = () => {
                     Đang tải...
                   </td>
                 </tr>
-              ) : currentReports.length === 0 ? (
+              ) : currentRequests.length === 0 ? (
                 <tr>
                   <td colSpan="7" className={styles.noData}>
                     Không có dữ liệu
                   </td>
                 </tr>
               ) : (
-                currentReports.map((report) => (
-                  <tr key={report.id}>
-                    <td>{report.id}</td>
-                    <td>{report.title}</td>
-                    <td>{report.type}</td>
+                currentRequests.map((request) => (
+                  <tr key={request.id}>
+                    <td>{request.id}</td>
+                    <td>{request.title}</td>
+                    <td>{request.type}</td>
                     <td>
-                      {new Date(report.createdAt).toLocaleDateString("vi-VN")}
+                      {new Date(request.createdAt).toLocaleDateString("vi-VN")}
                     </td>
-                    <td>{report.creator}</td>
-                    <td>{report.status}</td>
+                    <td>{request.creator}</td>
+                    <td>{request.status}</td>
                     <td className={styles.actions}>
                       <button
                         className={styles.buttonSend}
@@ -196,7 +196,7 @@ const EmployeeRequests = () => {
                       >
                         Gửi
                       </button>
-                      <Link to={`/employee-reports/${report.id}`}>
+                      <Link to={`/employee-requests/${request.id}`}>
                         <button className={styles.buttonEdit}>Sửa</button>
                       </Link>
                       <button
@@ -205,7 +205,7 @@ const EmployeeRequests = () => {
                           setState((prev) => ({
                             ...prev,
                             showModal: true,
-                            selectedReport: report,
+                            selectedRequest: request,
                           }))
                         }
                       >
@@ -219,8 +219,8 @@ const EmployeeRequests = () => {
           </table>
 
           <div className={styles.tableFooter}>
-            <Link to="/employee-reports/create">
-              <button className={styles.addButton}>+ Thêm báo cáo</button>
+            <Link to="/employee-requests/create">
+              <button className={styles.addButton}>+ Thêm Request</button>
             </Link>
 
             {pageCount > 1 && (
@@ -284,7 +284,7 @@ const EmployeeRequests = () => {
           setState((prev) => ({
             ...prev,
             showModal: false,
-            selectedReport: null,
+            selectedRequest: null,
           }))
         }
         centered
@@ -294,9 +294,9 @@ const EmployeeRequests = () => {
         </Modal.Header>
         <Modal.Body>
           <span className={styles.iconDelete}></span>
-          <p>Bạn có chắc chắn muốn xóa báo cáo này?</p>
-          <p className={styles.reportTitle}>
-            <strong>Tiêu đề:</strong> {state.selectedReport?.title}
+          <p>Bạn có chắc chắn muốn xóa request này?</p>
+          <p className={styles.requestTitle}>
+            <strong>Tiêu đề:</strong> {state.selectedRequest?.title}
           </p>
         </Modal.Body>
         <Modal.Footer>
@@ -306,7 +306,7 @@ const EmployeeRequests = () => {
               setState((prev) => ({
                 ...prev,
                 showModal: false,
-                selectedReport: null,
+                selectedRequest: null,
               }))
             }
           >
@@ -314,7 +314,7 @@ const EmployeeRequests = () => {
           </button>
           <button
             className={styles.buttonDeleteModal}
-            onClick={handleDeleteReport}
+            onClick={handleDeleteRequest}
           >
             Xóa
           </button>

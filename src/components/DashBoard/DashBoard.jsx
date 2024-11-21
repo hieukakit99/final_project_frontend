@@ -55,7 +55,7 @@ const Dashboard = () => {
           <span className={classes.menuItemIcon}>🗓</span>
           <span className={classes.menuItemText}>Quản lý Báo Cáo</span>
         </Link>
-        <Link to="/employee-request" className={classes.menuItem}>
+        <Link to="/employee-requests" className={classes.menuItem}>
           <span className={classes.menuItemIcon}>🗃</span>
           <span className={classes.menuItemText}>Quản lý Request</span>
         </Link>

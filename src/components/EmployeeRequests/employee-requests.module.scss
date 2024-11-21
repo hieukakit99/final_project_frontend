@@ -12,7 +12,7 @@
 }
 
 /* Report Container */
-.reportContainer {
+.requestContainer {
   padding: 20px;
 
   h2 {
@@ -104,7 +104,7 @@
   }
 
   /* Report Table */
-  .reportTable {
+  .requestTable {
     width: 100%;
     border-collapse: collapse;
     background-color: #ffffff;
@@ -121,12 +121,8 @@
     }
 
     th {
-      background-image: linear-gradient(
-        to top,
-        #1e3c72 0%,
-        #1e3c72 1%,
-        #2a5298 100%
-      );
+      background: linear-gradient(to bottom, #660033 0%, #003366 100%);
+
       color: #ffffff;
       font-family: robotoRegular;
     }

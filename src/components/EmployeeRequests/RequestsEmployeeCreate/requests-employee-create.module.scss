@@ -1,0 +1,126 @@
+.btnBack {
+  margin-left: 45px;
+  button {
+    padding: 10px 12px;
+    width: 75px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #3ff0d6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      background-color: #51c7ed;
+    }
+  }
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer {
+  text-align: center;
+  background: white;
+  padding: 30px;
+  width: 50%;
+  border-radius: 8px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #333;
+  }
+}
+
+.formGroup {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-start;
+
+  label {
+    width: 150px;
+    padding-top: 8px;
+    color: #333;
+  }
+
+  input,
+  select {
+    flex: 1;
+    max-width: 600px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #2196f3;
+    }
+  }
+
+  select {
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+  }
+
+  textarea {
+    flex: 1;
+    max-width: 600px;
+    height: 200px;
+    padding: 12px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #2196f3;
+    }
+  }
+}
+.buttonGroup {
+  display: flex;
+  justify-content: center; /* Căn giữa nhóm nút */
+  gap: 10px;
+  margin-top: 20px;
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+  }
+
+  .saveButton {
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+
+    &:hover {
+      background-image: linear-gradient(to top, #0acffe 0%, #495aff 100%);
+    }
+  }
+}
+.agreeButton {
+  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+  color: #fff;
+  width: 58px;
+  height: 38px;
+  border-radius: 4px;
+}

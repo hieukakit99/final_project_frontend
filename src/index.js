@@ -25,6 +25,8 @@ import EmployeeEdit from "./components/EmployeeManage/EmployeeEdit";
 import AddEmployee from "./components/EmployeeManage/AddEmployee";
 import AuthLayout from "./layouts/AuthLayout";
 import EmployeeRequests from "./components/EmployeeRequests/EmployeeRequests";
+import RequestsEmployeeCreate from "./components/EmployeeRequests/RequestsEmployeeCreate/RequestsEmployeeCreate";
+import RequestsEmployeeEdit from "./components/EmployeeRequests/RequestsEmployeeEdit/RequestsEmployeeEdit";
 
 const router = createBrowserRouter([
   {
@@ -100,8 +102,16 @@ const router = createBrowserRouter([
         element: <ReportsEmployeeEdit />,
       },
       {
-        path: "/employee-request",
+        path: "/employee-requests",
         element: <EmployeeRequests />,
+      },
+      {
+        path: "/employee-requests/create",
+        element: <RequestsEmployeeCreate />,
+      },
+      {
+        path: "/employee-requests/:id",
+        element: <RequestsEmployeeEdit />,
       },
       {
         path: "/add-employee",

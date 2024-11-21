@@ -1,0 +1,138 @@
+.btnBack {
+  margin-left: 45px;
+  button {
+    padding: 10px 22px;
+    width: 75px;
+    margin-top: 20px;
+    background-color: #3ff0d6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      background-color: #51c7ed;
+    }
+  }
+}
+.editContainer {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: #333;
+  }
+}
+
+.formGroup {
+  margin-bottom: 10px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+
+  &:focus {
+    outline: none;
+    border-color: #2196f3;
+  }
+  &:disabled {
+    background-color: #f5f5f5;
+  }
+}
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+.textarea {
+  height: 200px;
+  resize: vertical;
+  border: 1px solid #ccc;
+}
+
+.fileUpload {
+  display: flex;
+  gap: 10px;
+
+  .fileInput {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+  }
+
+  .uploadButton {
+    padding: 8px 16px;
+    background-color: #29ce55;
+    border: none;
+    font-family: robotoRegular;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #21f394;
+    }
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  button {
+    padding: 8px 26px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .saveButton {
+    background: linear-gradient(to bottom, #0000ff 0%, #66ccff 100%);
+    color: white;
+
+    &:hover {
+      background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);
+    }
+  }
+}
