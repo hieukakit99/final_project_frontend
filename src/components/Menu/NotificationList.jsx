@@ -1,17 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
-import './NotificationList.css';
+import React from "react";
+import { useState } from "react";
+import "./NotificationList.css";
 
 const NotificationList = ({ notifications, setNotifications }) => {
   const [selectedNotifications, setSelectedNotifications] = useState([]);
-
 
   return (
     <div className="notification-list">
       <table className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Chọn</th>
             <th scope="col">Người gửi</th>
             <th scope="col">Tiêu đề</th>
             <th scope="col">Nội dung</th>
@@ -32,8 +30,6 @@ const NotificationList = ({ notifications, setNotifications }) => {
           ))}
         </tbody>
       </table>
-
-
     </div>
   );
 };
