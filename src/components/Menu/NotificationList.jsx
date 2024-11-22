@@ -19,9 +19,6 @@ const NotificationList = ({ notifications, setNotifications }) => {
         <tbody>
           {notifications.map((notification, index) => (
             <tr key={index}>
-              <td>
-                <input type="checkbox" />
-              </td>
               <td>{notification.sender}</td>
               <td>{notification.title}</td>
               <td>{notification.content}</td>
