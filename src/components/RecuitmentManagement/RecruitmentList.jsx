@@ -103,7 +103,7 @@ const RecruitmentList = () => {
                   <th>Tên</th>
                   <th>Ngày sinh</th>
                   <th>Điểm</th>
-                  <th>Phỏng vấn</th>
+                  <th>Số Điện Thoại</th>
                   <th>Trạng thái</th>
                   <th>Hành động</th>
                 </tr>
