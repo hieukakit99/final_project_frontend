@@ -248,10 +248,10 @@ const UserList = () => {
             </div>
 
             <div className={styles.pointsInfo}>
-              <p>Điểm tích lũy: {userData.points}</p>
+              {/* <p>Điểm tích lũy: {userData.points}</p>
               <a href="#" className={styles.pointsPolicyLink}>
                 Xem chính sách tích lũy điểm
-              </a>
+              </a> */}
               <p className={styles.expireDate}>
                 Ngày tham gia: {userData.expireDate}
               </p>
