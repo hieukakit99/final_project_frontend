@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import './EmployeeList.css';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import "./EmployeeList.css";
 
 const EmployeeList = () => {
   const { id } = useParams();
   const [employees, setEmployees] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   // Lấy danh sách nhân viên từ API
   useEffect(() => {
     axios
-      .get('https://67396618a3a36b5a62ee89b2.mockapi.io/Employee-list')
+      .get("https://67396618a3a36b5a62ee89b2.mockapi.io/Employee-list")
       .then((response) => {
         const data = Array.isArray(response.data) ? response.data : []; // Đảm bảo data là mảng
         setEmployees(data);
       })
-      .catch((error) => console.error('Error fetching employees:', error));
+      .catch((error) => console.error("Error fetching employees:", error));
   }, []);
   // Lọc nhân viên theo từ khóa tìm kiếm
   const filteredEmployees = employees.filter((employee) =>
@@ -37,12 +37,9 @@ const EmployeeList = () => {
           />
         </Col>
         <Col md={6} className="text-end">
-        <Button
-        variant="primary"
-        onClick={() => navigate('/add-employee')}
-          >
-          Thêm Nhân Viên Mới
-        </Button>
+          <Button variant="primary" onClick={() => navigate("/add-employee")}>
+            Thêm Nhân Viên Mới
+          </Button>
         </Col>
       </Row>
 
@@ -52,7 +49,7 @@ const EmployeeList = () => {
             <div
               className="employee-card"
               onClick={() => navigate(`/employee-details/${employee.id}`)} // Điều hướng đến trang chi tiết
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div className="employee-image">
                 <img src={employee.avatar} alt={employee.name} />

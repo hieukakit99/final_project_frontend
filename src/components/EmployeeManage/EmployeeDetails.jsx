@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import axios from 'axios';
-import './EmployeeDetails.css';
-import EmployeeImage from './EmployeeImage'
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import axios from "axios";
+import "./EmployeeDetails.css";
+import EmployeeImage from "./EmployeeImage";
 const EmployeeDetails = () => {
   const { id } = useParams(); // Lấy id từ URL
   const [employee, setEmployee] = useState(null);
@@ -14,7 +14,9 @@ const EmployeeDetails = () => {
     axios
       .get(`https://67396618a3a36b5a62ee89b2.mockapi.io/Employee-Detail/${id}`) // Thay URL bằng API của bạn
       .then((response) => setEmployee(response.data))
-      .catch((error) => console.error('Error fetching employee details:', error));
+      .catch((error) =>
+        console.error("Error fetching employee details:", error)
+      );
   }, [id]);
 
   if (!employee) {
@@ -24,8 +26,8 @@ const EmployeeDetails = () => {
   return (
     <Container className="employee-details">
       <Row>
-        <Col className='align-self-center'>
-          <EmployeeImage imageUrl={employee.avatar} name={employee.name}  />
+        <Col className="align-self-center">
+          <EmployeeImage imageUrl={employee.avatar} name={employee.name} />
         </Col>
         <Col md={8}>
           <h2>Thông tin nhân viên</h2>
@@ -83,7 +85,11 @@ const EmployeeDetails = () => {
                 Phòng ban:
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" value={employee.department} readOnly />
+                <Form.Control
+                  type="text"
+                  value={employee.department}
+                  readOnly
+                />
               </Col>
             </Form.Group>
 
@@ -92,13 +98,17 @@ const EmployeeDetails = () => {
             </Button>
 
             <Button
-              variant="primary" 
-              onClick={() => navigate(`/edit-employee/${id}`) }
+              variant="primary"
+              onClick={() => navigate(`/edit-employee/${id}`)}
             >
               Chỉnh sửa thông tin nhân viên
             </Button>
 
-            <Button variant="primary" onClick={() => navigate(`/employee-profile`)} className='ms-2'>
+            <Button
+              variant="primary"
+              onClick={() => navigate(`/employee-profile`)}
+              className="ms-2"
+            >
               Quay lại
             </Button>
           </Form>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://673a01a7a3a36b5a62f06bdb.mockapi.io";
-const API_NAME = "userApi";
+const API_URL = "http://localhost:8080/api/v1";
+const API_NAME = "users";
 
 export const userApi = {
   /**
@@ -10,7 +10,11 @@ export const userApi = {
    */
   getUsers: async () => {
     try {
-      const response = await axios.get(`${API_URL}/${API_NAME}`);
+      const response = await axios.get(`${API_URL}/${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching users:", error);

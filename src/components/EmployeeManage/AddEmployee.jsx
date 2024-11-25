@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AddEmployee = () => {
   const [employee, setEmployee] = useState({
-    name: '',
-    email: '',
-    dob: '',
-    phone: '',
-    address: '',
-    department: '',
-    avatar: '', // URL hình ảnh
+    name: "",
+    email: "",
+    dob: "",
+    phone: "",
+    address: "",
+    department: "",
+    avatar: "", // URL hình ảnh
   });
 
   const navigate = useNavigate();
@@ -25,12 +25,15 @@ const AddEmployee = () => {
     e.preventDefault();
 
     try {
-      await axios.post('https://67396618a3a36b5a62ee89b2.mockapi.io/Employee-list', employee);
-      alert('Nhân viên đã được thêm thành công!');
-      navigate('/employee-profile'); // Quay về danh sách nhân viên
+      await axios.post(
+        "https://67396618a3a36b5a62ee89b2.mockapi.io/Employee-list",
+        employee
+      );
+      alert("Nhân viên đã được thêm thành công!");
+      navigate("/employee-profile"); // Quay về danh sách nhân viên
     } catch (error) {
-      console.error('Lỗi khi thêm nhân viên:', error);
-      alert('Đã xảy ra lỗi khi thêm nhân viên.');
+      console.error("Lỗi khi thêm nhân viên:", error);
+      alert("Đã xảy ra lỗi khi thêm nhân viên.");
     }
   };
 
@@ -139,7 +142,7 @@ const AddEmployee = () => {
         <Button
           variant="secondary"
           className="ms-3"
-          onClick={() => navigate('/employee-profile')}
+          onClick={() => navigate("/employee-profile")}
         >
           Quay lại
         </Button>

@@ -7,13 +7,13 @@ import authApi from "../../api/authApi";
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [messageError, setMessageError] = useState({
-    username: "",
+    email: "",
     password: "",
     invalidAccount: "",
   });
@@ -23,7 +23,7 @@ const SignIn = () => {
   const onChangeUserName = (event) => {
     setCredentials({
       ...credentials,
-      username: event.target.value,
+      email: event.target.value,
     });
   };
 
@@ -36,19 +36,19 @@ const SignIn = () => {
 
   const handleSignIn = async () => {
     const msgError = {
-      username: "",
+      email: "",
       password: "",
       invalidAccount: "",
     };
 
     // Validate input
-    if (!credentials.username.trim()) {
-      msgError.username = "❌ User name is required";
+    if (!credentials.email.trim()) {
+      msgError.email = "❌ User name is required";
     }
     if (!credentials.password.trim()) {
       msgError.password = "❌ Password is required";
     }
-    if (msgError.username || msgError.password) {
+    if (msgError.email || msgError.password) {
       setMessageError(msgError);
       return;
     }
@@ -57,11 +57,11 @@ const SignIn = () => {
       const { data } = await authApi.login(credentials);
       console.log(data);
       localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("token", data);
 
       // Nếu đăng nhập thành công
-      setCredentials({ username: "", password: "" });
-      setMessageError({ username: "", password: "", invalidAccount: "" });
+      setCredentials({ email: "", password: "" });
+      setMessageError({ email: "", password: "", invalidAccount: "" });
 
       // Điều hướng đến homepage
       navigate(`/`);
@@ -77,7 +77,7 @@ const SignIn = () => {
         <div className={style["sign-in__heading"]}>Welcome</div>
 
         <div className={style["sign-in__error"]}>
-          <p>{messageError.username}</p>
+          <p>{messageError.email}</p>
           <p>{messageError.password}</p>
           <p>{messageError.invalidAccount}</p>
         </div>
@@ -86,7 +86,7 @@ const SignIn = () => {
           <input
             type="text"
             placeholder="Enter your user name"
-            value={credentials.username}
+            value={credentials.email}
             onChange={onChangeUserName}
             className={style["sign-in__textfield"]}
           />

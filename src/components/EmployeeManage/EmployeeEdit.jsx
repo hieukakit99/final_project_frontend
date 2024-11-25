@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-import './EmployeeEdit.css';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import "./EmployeeEdit.css";
 
 const EditEmployee = () => {
   const { id } = useParams(); // Lấy id nhân viên từ URL
@@ -18,45 +18,41 @@ const EditEmployee = () => {
   });
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     axios
-//       .get(`https://mockapi.io/projects/123456/employees/${id}`) // Thay bằng URL API của bạn
-//       .then((response) => setEmployee(response.data))
-//       .catch((error) => console.error('Error fetching employee details:', error));
-//   }, [id]);
+  //   useEffect(() => {
+  //     axios
+  //       .get(`https://mockapi.io/projects/123456/employees/${id}`) // Thay bằng URL API của bạn
+  //       .then((response) => setEmployee(response.data))
+  //       .catch((error) => console.error('Error fetching employee details:', error));
+  //   }, [id]);
 
-//   const handleSave = () => {
-//     const updatedEmployee = { ...employee, avatar }; // Cập nhật thông tin và ảnh
-//     axios
-//       .put(`https://mockapi.io/projects/123456/employees/${id}`, updatedEmployee) // Thay bằng URL API của bạn
-//       .then(() => navigate(`/employee-details/${id}`))
-//       .catch((error) => console.error('Error saving employee details:', error));
-//   };
+  //   const handleSave = () => {
+  //     const updatedEmployee = { ...employee, avatar }; // Cập nhật thông tin và ảnh
+  //     axios
+  //       .put(`https://mockapi.io/projects/123456/employees/${id}`, updatedEmployee) // Thay bằng URL API của bạn
+  //       .then(() => navigate(`/employee-details/${id}`))
+  //       .catch((error) => console.error('Error saving employee details:', error));
+  //   };
 
-const [avatar, setAvatar] = useState(employee.avatar); // Dùng để lưu ảnh mới
+  const [avatar, setAvatar] = useState(employee.avatar); // Dùng để lưu ảnh mới
 
-const handleSave = () => {
-  // Hiện thông báo để mô phỏng lưu dữ liệu
-  alert('Thông tin đã được lưu tạm thời!');
-  navigate(`/employee-details/${id}`);
-};
+  const handleSave = () => {
+    // Hiện thông báo để mô phỏng lưu dữ liệu
+    alert("Thông tin đã được lưu tạm thời!");
+    navigate(`/employee-details/${id}`);
+  };
 
-const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  setAvatar(URL.createObjectURL(file)); // Hiển thị ảnh mới
-};
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setAvatar(URL.createObjectURL(file)); // Hiển thị ảnh mới
+  };
 
   return (
     <Container className="edit-employee">
       <h2>Chỉnh sửa thông tin nhân viên</h2>
-      <Row className='edit-container'>
-      <Col md={4}>
+      <Row className="edit-container">
+        <Col md={4}>
           <div className="edit-avatar">
-            <img
-              src={avatar}
-              alt="Avatar"
-              className="edit-avatar-image"
-            />
+            <img src={avatar} alt="Avatar" className="edit-avatar-image" />
             <Form.Control
               type="file"
               accept="image/*"
@@ -160,7 +156,11 @@ const handleFileChange = (e) => {
             <Button variant="success" onClick={handleSave}>
               Lưu thông tin thay đổi
             </Button>
-            <Button variant="secondary" onClick={() => navigate(`/employee-details/${id}`)} className="ms-2">
+            <Button
+              variant="secondary"
+              onClick={() => navigate(`/employee-details/${id}`)}
+              className="ms-2"
+            >
               Quay lại
             </Button>
           </Form>

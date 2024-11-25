@@ -32,9 +32,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <AuthLayout>
-      <LayoutRoot />
-      // </AuthLayout>
+      <AuthLayout>
+        <LayoutRoot />
+      </AuthLayout>
     ),
     children: [
       {
@@ -122,9 +122,9 @@ const router = createBrowserRouter([
   {
     path: "/sign-in",
     element: (
-      // <AuthLayout isPublic>
-      <SignIn />
-      // </AuthLayout>
+      <AuthLayout isPublic>
+        <SignIn />
+      </AuthLayout>
     ),
   },
 ]);

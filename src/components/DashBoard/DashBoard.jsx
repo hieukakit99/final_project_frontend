@@ -8,7 +8,8 @@ import UserList from "../UserProfile/UserList/UserList";
 const Dashboard = () => {
   const [isApprovalOpen, setIsApprovalOpen] = useState(false); // State to control dropdown visibility
   const userStorage = localStorage.getItem("user");
-  const user = userStorage ? JSON.parse(userStorage) : {};
+
+  const user = userStorage === "undefined" ? {} : JSON.parse(userStorage);
   const classes = {
     dashboardContainer: `${style.dashboard__container}`,
     header: `${style.dashboard__header}`,

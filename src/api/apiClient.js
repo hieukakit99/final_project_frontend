@@ -29,4 +29,7 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+const login = (url, body) => {
+  return api.post(url, body);
+};
+export default { login, ...api };

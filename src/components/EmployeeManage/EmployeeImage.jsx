@@ -1,5 +1,5 @@
-import React from 'react';
-import './EmployeeImage.css';
+import React from "react";
+import "./EmployeeImage.css";
 
 const EmployeeImage = ({ imageUrl, name }) => {
   return (
