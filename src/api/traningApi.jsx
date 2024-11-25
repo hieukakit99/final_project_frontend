@@ -6,7 +6,11 @@ const API_NAME = "trainingApi";
 export const trainingApi = {
   getTrainings: async () => {
     try {
-      const response = await axios.get(`${API_URL}/${API_NAME}`);
+      const response = await axios.get(`${API_URL}/${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching trainings:", error);
