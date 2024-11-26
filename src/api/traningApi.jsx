@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://65a14790600f49256fb15464.mockapi.io";
-const API_NAME = "trainingApi";
+const API_URL = "http://localhost:8080/api/";
+const API_NAME = "training-programs";
 
 export const trainingApi = {
   getTrainings: async () => {

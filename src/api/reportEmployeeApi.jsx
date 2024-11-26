@@ -1,6 +1,5 @@
 import api from "./apiClient";
-
-const API_NAME = "workreports";
+const API_NAME = "http://localhost:8080/api/workreports";
 
 const reportEmployeeApi = {
   getAllReports: async () => {

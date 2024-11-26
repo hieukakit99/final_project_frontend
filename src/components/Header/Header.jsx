@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowRight from "../Icons/ArrowRight";
 import style from "./header.module.scss";
 import HousePlus from "../Icons/HousePlus";
@@ -14,6 +14,11 @@ const Header = () => {
     headerIcon: `${style.header__icon}`,
     headerBtnIcon: `${style.header__btn_icon}`,
   };
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/sign-in");
+  };
 
   return (
     <header className={classes.headerContainer}>
@@ -25,11 +30,13 @@ const Header = () => {
           <h1 className={classes.headerTitle}>Quản Lý Nhân Sự</h1>
         </Link>
         <div className={classes.headerActions}>
-          <Link to="/sign-in" className={classes.headerBtn}>
-            <span className={classes.headerBtnText}>Logout</span>
+          <Link to="#" className={classes.headerBtn} onClick={handleLogout}>
+            {" "}
+            <span className={classes.headerBtnText}>Logout</span>{" "}
             <span className={classes.headerBtnIcon}>
-              <ArrowRight />
-            </span>
+              {" "}
+              <ArrowRight />{" "}
+            </span>{" "}
           </Link>
         </div>
       </div>

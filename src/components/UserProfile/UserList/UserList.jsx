@@ -5,10 +5,10 @@ import styles from "./user-list.module.scss";
 
 const UserList = () => {
   // Initial state for userData
-  const [userData, setUserData] = useState({
+  const defaultUserData = {
     id: "",
     fullName: "",
-    taxId: "",
+    taxId: "123456",
     email: "",
     gender: "",
     phone: "",
@@ -18,41 +18,41 @@ const UserList = () => {
     address: "",
     skill: "",
     country: "Việt Nam",
-    department: "",
     points: 0,
     expireDate: "",
     postedAds: 0,
-  });
+  };
 
-  const [loading, setLoading] = useState(true); // For loading state
-  const [error, setError] = useState(null); // For error handling
+  const [userData, setUserData] = useState(defaultUserData);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const users = await userApi.getUsers(); // Fetch the list of users from API
-        if (users.length > 0) {
-          setUserData(users[0]); // Assuming we want to display the first user
+        const users = await userApi.getUsers();
+        if (users && users.length > 0) {
+          setUserData(users[0]); // Hiển thị người dùng đầu tiên
         } else {
-          setError("No users found.");
+          setError("Không tìm thấy người dùng nào.");
         }
       } catch (error) {
-        setError("Failed to fetch user data.");
+        setError("Lỗi khi lấy dữ liệu người dùng.");
       } finally {
-        setLoading(false); // Stop loading after fetching is done
+        setLoading(false);
       }
     };
 
-    fetchUserData(); // Call the fetch function
+    fetchUserData();
   }, []);
 
   const validateForm = () => {
     if (!userData.fullName.trim()) {
-      alert("Full Name is required.");
+      alert("Họ và tên là bắt buộc.");
       return false;
     }
     if (!userData.email.includes("@")) {
-      alert("Enter a valid email address.");
+      alert("Email không hợp lệ.");
       return false;
     }
     return true;
@@ -66,20 +66,24 @@ const UserList = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form data:", userData);
+      try {
+        await userApi.updateUser(userData.id, userData);
+        alert("Cập nhật thông tin thành công!");
+      } catch {
+        alert("Lỗi khi cập nhật thông tin.");
+      }
     }
   };
 
-  // Display loading or error message if needed
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Đang tải dữ liệu...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className={styles.error}>{error}</div>;
   }
 
   return (
