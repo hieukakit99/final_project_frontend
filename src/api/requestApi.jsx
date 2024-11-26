@@ -8,7 +8,11 @@ const requestApi = {
   // Lấy danh sách yêu cầu với phân trang
   getAllRequests: async (page = 1, pageSize = 5) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/${API_NAME}`);
+      const response = await axios.get(`${API_BASE_URL}/${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching all requests:", error);
@@ -19,7 +23,11 @@ const requestApi = {
   // Lấy chi tiết một yêu cầu theo ID
   getRequestById: async (id) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(`Error fetching request by ID (${id}):`, error);
@@ -30,10 +38,18 @@ const requestApi = {
   // Duyệt yêu cầu (chấp nhận)
   approveRequest: async (id) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/${API_NAME}/${id}`, {
-        status: "Approved",
-        managerApproved: true,
-      });
+      const response = await axios.put(
+        `${API_BASE_URL}/${API_NAME}/${id}`,
+        {
+          status: "Approved",
+          managerApproved: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error(`Error approving request ID (${id}):`, error);
@@ -44,11 +60,19 @@ const requestApi = {
   // Từ chối yêu cầu với lý do
   rejectRequest: async (id, reason) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/${API_NAME}/${id}`, {
-        status: "Rejected",
-        managerApproved: false,
-        reason,
-      });
+      const response = await axios.put(
+        `${API_BASE_URL}/${API_NAME}/${id}`,
+        {
+          status: "Rejected",
+          managerApproved: false,
+          reason,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error(`Error rejecting request ID (${id}):`, error);

@@ -5,7 +5,11 @@ const API_NAME = "workreports";
 const reportEmployeeApi = {
   getAllReports: async () => {
     try {
-      const response = await api.get(`${API_NAME}`);
+      const response = await api.get(`${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching reports:", error.response?.data || error);
@@ -15,7 +19,11 @@ const reportEmployeeApi = {
 
   getReportById: async (id) => {
     try {
-      const response = await api.get(`${API_NAME}/${id}`);
+      const response = await api.get(`${API_NAME}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(
@@ -28,7 +36,11 @@ const reportEmployeeApi = {
 
   createReport: async (data) => {
     try {
-      const response = await api.post(`${API_NAME}/create`, data);
+      const response = await api.post(`${API_NAME}/create`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error creating report:", error.response?.data || error);
@@ -38,7 +50,11 @@ const reportEmployeeApi = {
 
   updateReport: async (id, data) => {
     try {
-      const response = await api.put(`${API_NAME}/update/${id}`, data);
+      const response = await api.put(`${API_NAME}/update/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(
@@ -51,7 +67,11 @@ const reportEmployeeApi = {
 
   deleteReport: async (id) => {
     try {
-      await api.delete(`${API_NAME}/${id}`);
+      await api.delete(`${API_NAME}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     } catch (error) {
       console.error(
         `Error deleting report ID (${id}):`,

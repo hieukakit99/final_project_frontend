@@ -6,7 +6,11 @@ const API_NAME = "recruitmentApi";
 export const recruitmentApi = {
   getCandidates: async () => {
     try {
-      const response = await axios.get(`${API_URL}/${API_NAME}`);
+      const response = await axios.get(`${API_URL}/${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching candidates:", error);
@@ -16,7 +20,14 @@ export const recruitmentApi = {
 
   getCandidateById: async (candidateId) => {
     try {
-      const response = await axios.get(`${API_URL}/${API_NAME}/${candidateId}`);
+      const response = await axios.get(
+        `${API_URL}/${API_NAME}/${candidateId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error(`Error fetching candidate with ID ${candidateId}:`, error);
@@ -24,16 +35,16 @@ export const recruitmentApi = {
     }
   },
 
-  /**
-   * Create a new candidate
-   * @param {Object} candidateData - The candidate data to be created
-   * @returns {Promise<Object>} The created candidate
-   */
   createCandidate: async (candidateData) => {
     try {
       const response = await axios.post(
         `${API_URL}/${API_NAME}`,
-        candidateData
+        candidateData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -46,7 +57,12 @@ export const recruitmentApi = {
     try {
       const response = await axios.put(
         `${API_URL}/${API_NAME}/${candidateId}`,
-        candidateData
+        candidateData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -55,15 +71,15 @@ export const recruitmentApi = {
     }
   },
 
-  /**
-   * Delete a candidate by ID
-   * @param {string} candidateId - The ID of the candidate to delete
-   * @returns {Promise<Object>} Response from the API
-   */
   deleteCandidate: async (candidateId) => {
     try {
       const response = await axios.delete(
-        `${API_URL}/${API_NAME}/${candidateId}`
+        `${API_URL}/${API_NAME}/${candidateId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {

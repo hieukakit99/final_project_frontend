@@ -6,7 +6,11 @@ const API_NAME = "reportEmployeeApi";
 const requestEmployeeApi = {
   getAllRequests: async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/${API_NAME}`);
+      const response = await axios.get(`${API_BASE_URL}/${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching reports:", error.response?.data || error);
@@ -16,7 +20,11 @@ const requestEmployeeApi = {
 
   getRequestById: async (id) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/${API_NAME}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(
@@ -29,7 +37,11 @@ const requestEmployeeApi = {
 
   createRequest: async (data) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/${API_NAME}`, data);
+      const response = await axios.post(`${API_BASE_URL}/${API_NAME}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error creating report:", error.response?.data || error);
@@ -41,7 +53,12 @@ const requestEmployeeApi = {
     try {
       const response = await axios.put(
         `${API_BASE_URL}/${API_NAME}/${id}`,
-        data
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -55,7 +72,11 @@ const requestEmployeeApi = {
 
   deleteRequest: async (id) => {
     try {
-      await axios.delete(`${API_BASE_URL}/${API_NAME}/${id}`);
+      await axios.delete(`${API_BASE_URL}/${API_NAME}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     } catch (error) {
       console.error(
         `Error deleting report ID (${id}):`,

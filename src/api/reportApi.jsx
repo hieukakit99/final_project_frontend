@@ -6,7 +6,11 @@ const reportApi = {
   // Lấy danh sách yêu cầu với phân trang và bộ lọc
   getAllRequests: async () => {
     try {
-      const response = await api.get(`${API_NAME}`);
+      const response = await api.get(`${API_NAME}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching all requests:", error);
@@ -17,7 +21,11 @@ const reportApi = {
   // Lấy chi tiết một yêu cầu theo ID
   getRequestById: async (id) => {
     try {
-      const response = await api.get(`${API_NAME}/${id}`);
+      const response = await api.get(`${API_NAME}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(`Error fetching request by ID (${id}):`, error);
@@ -28,10 +36,18 @@ const reportApi = {
   // Duyệt yêu cầu
   approveRequest: async (id) => {
     try {
-      const response = await api.put(`${API_NAME}/${id}`, {
-        status: "Approved",
-        managerApproved: true,
-      });
+      const response = await api.put(
+        `${API_NAME}/${id}`,
+        {
+          status: "Approved",
+          managerApproved: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error(`Error approving request ID (${id}):`, error);
@@ -42,11 +58,19 @@ const reportApi = {
   // Từ chối yêu cầu với lý do
   rejectRequest: async (id, reason) => {
     try {
-      const response = await api.put(`${API_NAME}/${id}`, {
-        status: "Rejected",
-        managerApproved: false,
-        reason,
-      });
+      const response = await api.put(
+        `${API_NAME}/${id}`,
+        {
+          status: "Rejected",
+          managerApproved: false,
+          reason,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error(`Error rejecting request ID (${id}):`, error);

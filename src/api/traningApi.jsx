@@ -20,7 +20,11 @@ export const trainingApi = {
 
   getTrainingById: async (trainingId) => {
     try {
-      const response = await axios.get(`${API_URL}/${API_NAME}/${trainingId}`);
+      const response = await axios.get(`${API_URL}/${API_NAME}/${trainingId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(`Error fetching training with ID ${trainingId}:`, error);
@@ -30,7 +34,15 @@ export const trainingApi = {
 
   createTraining: async (trainingData) => {
     try {
-      const response = await axios.post(`${API_URL}/${API_NAME}`, trainingData);
+      const response = await axios.post(
+        `${API_URL}/${API_NAME}`,
+        trainingData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       console.error("Error creating training:", error);
@@ -42,7 +54,12 @@ export const trainingApi = {
     try {
       const response = await axios.put(
         `${API_URL}/${API_NAME}/${trainingId}`,
-        trainingData
+        trainingData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -51,15 +68,15 @@ export const trainingApi = {
     }
   },
 
-  /**
-   * Delete a training class by ID
-   * @param {string} trainingId - The ID of the training to delete
-   * @returns {Promise<Object>} Response from the API
-   */
   deleteTraining: async (trainingId) => {
     try {
       const response = await axios.delete(
-        `${API_URL}/${API_NAME}/${trainingId}`
+        `${API_URL}/${API_NAME}/${trainingId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
