@@ -1,5 +1,6 @@
 import api from "./apiClient";
-const API_NAME = "http://localhost:8080/api/workreports";
+const API_NAME =
+  "https://673a01a7a3a36b5a62f06bdb.mockapi.io/reportEmployeeApi";
 
 const reportEmployeeApi = {
   getAllReports: async () => {

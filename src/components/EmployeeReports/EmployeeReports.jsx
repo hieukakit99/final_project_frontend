@@ -85,8 +85,35 @@ const EmployeeReports = () => {
   const currentReports = useMemo(() => {
     const start = (state.currentPage - 1) * state.pageSize;
     const end = start + state.pageSize;
-    return state.reports.slice(start, end);
-  }, [state.reports, state.currentPage, state.pageSize]);
+
+    // Lọc báo cáo theo tiêu đề và khoảng thời gian
+    const filteredReports = state.reports.filter((report) => {
+      const reportDate = new Date(report.createdAt);
+      const startDate = state.startDate ? new Date(state.startDate) : null;
+      const endDate = state.endDate ? new Date(state.endDate) : null;
+
+      // Kiểm tra xem báo cáo có nằm trong khoảng thời gian không
+      const isInDateRange =
+        (!startDate || reportDate >= startDate) &&
+        (!endDate || reportDate <= endDate);
+
+      // Lọc theo tiêu đề báo cáo nếu có giá trị tìm kiếm
+      const matchesSearch =
+        !state.search ||
+        report.title.toLowerCase().includes(state.search.toLowerCase());
+
+      return isInDateRange && matchesSearch;
+    });
+
+    return filteredReports.slice(start, end);
+  }, [
+    state.reports,
+    state.currentPage,
+    state.pageSize,
+    state.search,
+    state.startDate,
+    state.endDate,
+  ]);
 
   return (
     <div className={styles.container}>

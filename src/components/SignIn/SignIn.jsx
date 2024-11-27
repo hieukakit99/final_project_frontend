@@ -56,6 +56,14 @@ const SignIn = () => {
     try {
       const { data } = await authApi.login(credentials);
       console.log(data);
+      // data = {
+      //   user: {
+      //     id: 1,
+      //     fullName: 'Ngueyn Van A',
+      //     role: 'ADMIN'
+      //   },
+      //   token: 'fasdfsadgsadg'
+      // }
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("token", data);
 
