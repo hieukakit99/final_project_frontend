@@ -62,7 +62,7 @@ const Dashboard = () => {
         </Link>
 
         {/* Approval Dropdown */}
-        {user.role === "ADMIN" && (
+        {user?.role === "ADMIN" && (
           <div className={classes.menuItem} onClick={toggleApproval}>
             <span className={classes.menuItemIcon}>✅</span>
             <span className={classes.menuItemText}>Approval</span>
