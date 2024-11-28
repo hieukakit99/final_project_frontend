@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./EmployeeList.css";
+import styles from "./EmployeeList.module.scss"; // Assuming we have an SCSS module
+import Pagination from "react-bootstrap/Pagination"; // Assuming Bootstrap pagination
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const [pageSize] = useState(9); // Number of employees per page
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,83 +29,118 @@ const EmployeeList = () => {
       employee.userName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const pageCount = Math.ceil(filteredEmployees.length / pageSize); // Calculate total number of pages
+
+  // Get the employees to display on the current page
+  const displayedEmployees = filteredEmployees.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
-    <Container>
-      <Row className="mb-4">
-        <Col md={8}>
-          <Form.Control
-            type="text"
-            placeholder="Tìm kiếm nhân viên..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </Col>
-        <Col md={4}>
-          <Button
-            variant="primary"
-            className="w-100"
-            onClick={() => navigate("/add-employee")}
-          >
-            Thêm Nhân Viên Mới
-          </Button>
-        </Col>
-      </Row>
-      <Row xs={1} md={2} lg={3} className="g-4">
-        {filteredEmployees.length > 0 ? (
-          filteredEmployees.map((employee) => (
-            <Col key={employee.profileId}>
-              <Card
-                className="h-100 shadow-sm"
-                style={{ cursor: "pointer" }}
-                onClick={() =>
-                  navigate(`/employee-details/${employee.profileId}`)
-                }
-              >
-                <Card.Body>
-                  <Card.Title className="mb-3">
-                    {employee.userName || "Chưa cập nhật"}
-                  </Card.Title>
-                  <Card.Text>
-                    <div className="d-flex justify-content-between">
-                      <strong>Chức danh:</strong>
-                      <span>{employee.jobTitle || "N/A"}</span>
-                    </div>
-                    <div className="d-flex justify-content-between mt-2">
-                      <strong>Phòng ban:</strong>
-                      <span>{employee.departmentName || "N/A"}</span>
-                    </div>
-                    <div className="d-flex justify-content-between mt-2">
-                      <strong>Ngày thuê:</strong>
-                      <span>{employee.hireDate || "N/A"}</span>
-                    </div>
-                    <div className="d-flex justify-content-between mt-2">
-                      <strong>Trạng thái:</strong>
-                      <span
-                        className={`badge ${
-                          employee.status === "Active"
-                            ? "bg-success"
-                            : employee.status === "Inactive"
-                            ? "bg-danger"
-                            : "bg-secondary"
-                        }`}
-                      >
-                        {employee.status || "N/A"}
-                      </span>
-                    </div>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+    <div className={styles.container}>
+      <div className={styles.searchAndAdd}>
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Tìm kiếm nhân viên..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button
+          className={styles.addButton}
+          onClick={() => navigate("/add-employee")}
+        >
+          Thêm Nhân Viên Mới
+        </button>
+      </div>
+
+      <div className={styles.employeeList}>
+        {displayedEmployees.length > 0 ? (
+          displayedEmployees.map((employee) => (
+            <div
+              key={employee.profileId}
+              className={styles.employeeCard}
+              onClick={() =>
+                navigate(`/employee-details/${employee.profileId}`)
+              }
+            >
+              <div className={styles.cardBody}>
+                <h3 className={styles.cardTitle}>
+                  {employee.userName || "Chưa cập nhật"}
+                </h3>
+                <p className={styles.cardText}>
+                  <div className={styles.cardRow}>
+                    <strong>Chức danh:</strong>
+                    <span>{employee.jobTitle || "N/A"}</span>
+                  </div>
+                  <div className={styles.cardRow}>
+                    <strong>Phòng ban:</strong>
+                    <span>{employee.departmentName || "N/A"}</span>
+                  </div>
+                  <div className={styles.cardRow}>
+                    <strong>Ngày thuê:</strong>
+                    <span>{employee.hireDate || "N/A"}</span>
+                  </div>
+                  <div className={styles.cardRow}>
+                    <strong>Trạng thái:</strong>
+                    <span
+                      className={`${styles.badge} ${
+                        employee.status === "Active"
+                          ? styles.active
+                          : employee.status === "Inactive"
+                          ? styles.inactive
+                          : styles.secondary
+                      }`}
+                    >
+                      {employee.status || "N/A"}
+                    </span>
+                  </div>
+                </p>
+              </div>
+            </div>
           ))
         ) : (
-          <Col>
-            <Card className="text-center">
-              <Card.Body>Không tìm thấy nhân viên nào.</Card.Body>
-            </Card>
-          </Col>
+          <div className={styles.noEmployee}>
+            <div className={styles.card}>
+              <p>Không tìm thấy nhân viên nào.</p>
+            </div>
+          </div>
         )}
-      </Row>
-    </Container>
+      </div>
+      <div className={styles.page}>
+        {/* Pagination controls */}
+        <Pagination>
+          <Pagination.First
+            onClick={() => setCurrentPage(1)}
+            disabled={currentPage === 1}
+          />
+          <Pagination.Prev
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+          />
+
+          {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
+            <Pagination.Item
+              key={page}
+              active={page === currentPage}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </Pagination.Item>
+          ))}
+
+          <Pagination.Next
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={currentPage === pageCount}
+          />
+          <Pagination.Last
+            onClick={() => setCurrentPage(pageCount)}
+            disabled={currentPage === pageCount}
+          />
+        </Pagination>
+      </div>
+    </div>
   );
 };
 
