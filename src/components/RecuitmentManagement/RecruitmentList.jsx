@@ -5,19 +5,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { recruitmentApi } from "../../api/recruitmentApi";
 
-const departments = [
-  { value: "vti", label: "VTI Group" },
-  { value: "fsoft", label: "FPT Software" },
-  { value: "cmc", label: "CMC Corporation" },
-  { value: "rikkesoft", label: "RikkeSoft" },
-];
-
 const pageSizes = [5, 10, 15, 20];
-
-const renderDepartment = (value) => {
-  const department = departments.find((item) => item.value === value);
-  return department ? department.label : "Unknown";
-};
 
 const RecruitmentList = () => {
   const [candidateList, setCandidateList] = useState([]);
@@ -111,11 +99,11 @@ const RecruitmentList = () => {
               <tbody>
                 {currentCandidates.map((candidate) => (
                   <tr key={candidate.id}>
-                    <td>{renderDepartment(candidate.department)}</td>
+                    <td>{candidate.department}</td>
                     <td>{candidate.name}</td>
                     <td>{moment(candidate.birth).format("DD/MM/YYYY")}</td>
                     <td>{candidate.points}</td>
-                    <td>{candidate.interview}</td>
+                    <td>{candidate.phone}</td>
                     <td>{candidate.status}</td>
                     <td className={style.list__action}>
                       <Link

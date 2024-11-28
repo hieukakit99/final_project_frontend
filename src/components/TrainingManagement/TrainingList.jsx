@@ -52,7 +52,7 @@ const TrainingList = () => {
           item.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
       : classList;
-    setFilteredClasses(filtered);
+    setFilteredClasses(filtered.reverse());
   }, [searchTerm, classList]);
 
   // Fetch classes on component mount
@@ -78,12 +78,12 @@ const TrainingList = () => {
         <table className={style.list__table}>
           <thead>
             <tr>
-              <th>Class Name</th>
-              <th>Tutor</th>
-              <th>Start Date</th>
-              <th>Candidate Count</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>Tên lớp</th>
+              <th>Giảng viên</th>
+              <th>Ngày bắt đầu</th>
+              <th>Số lượng ứng viên</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
             </tr>
           </thead>
           <tbody>

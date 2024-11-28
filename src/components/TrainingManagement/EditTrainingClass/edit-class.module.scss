@@ -19,7 +19,11 @@
     }
   }
 }
-
+.error {
+  color: red;
+  font-size: 14px;
+  display: block;
+}
 .list {
   &__container {
     padding: 20px 30px;

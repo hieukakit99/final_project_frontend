@@ -1,3 +1,4 @@
+//create-training-class.module.scss
 .btn__back {
   margin-left: 45px;
   button {
@@ -139,7 +140,7 @@
     }
   }
   &__listBtn {
-    background-color: #28a745;
+    background: linear-gradient(91deg, #7934da 0%, #4d52e0 100%);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -212,4 +213,9 @@
   &:hover {
     background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
   }
+}
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }

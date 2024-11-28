@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/";
-const API_NAME = "training-programs";
+const API_URL = "https://65a14790600f49256fb15464.mockapi.io//";
+const API_NAME = "trainingApi";
 
 export const trainingApi = {
   getTrainings: async () => {
@@ -46,7 +46,7 @@ export const trainingApi = {
       return response.data;
     } catch (error) {
       console.error("Error creating training:", error);
-      throw error;
+      throw new Error("Failed to create training. Please try again later.");
     }
   },
 
