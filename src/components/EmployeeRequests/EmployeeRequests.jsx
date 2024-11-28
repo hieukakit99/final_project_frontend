@@ -85,8 +85,35 @@ const EmployeeRequests = () => {
   const currentRequests = useMemo(() => {
     const start = (state.currentPage - 1) * state.pageSize;
     const end = start + state.pageSize;
-    return state.requests.slice(start, end);
-  }, [state.requests, state.currentPage, state.pageSize]);
+
+    // Lọc request theo tiêu đề và khoảng thời gian
+    const filteredRequests = state.requests.filter((request) => {
+      const requestDate = new Date(request.createdAt);
+      const startDate = state.startDate ? new Date(state.startDate) : null;
+      const endDate = state.endDate ? new Date(state.endDate) : null;
+
+      // Kiểm tra xem request có nằm trong khoảng thời gian không
+      const isInDateRange =
+        (!startDate || requestDate >= startDate) &&
+        (!endDate || requestDate <= endDate);
+
+      // Lọc theo tiêu đề request nếu có giá trị tìm kiếm
+      const matchesSearch =
+        !state.search ||
+        request.title.toLowerCase().includes(state.search.toLowerCase());
+
+      return isInDateRange && matchesSearch;
+    });
+
+    return filteredRequests.slice(start, end);
+  }, [
+    state.requests,
+    state.currentPage,
+    state.pageSize,
+    state.search,
+    state.startDate,
+    state.endDate,
+  ]);
 
   return (
     <div className={styles.container}>

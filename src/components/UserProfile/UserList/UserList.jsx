@@ -6,21 +6,19 @@ import styles from "./user-list.module.scss";
 const UserList = () => {
   // Initial state for userData
   const defaultUserData = {
-    id: "",
+    id: "N/A",
     fullName: "",
     taxId: "123456",
-    email: "",
+    email: "N/A",
     gender: "",
     phone: "",
-    birthDate: "",
-    department: "",
-    position: "",
-    address: "",
+    birthDate: "01/12/2024",
+    department: "N/A",
+    position: "N/A",
+    address: "Hà Nội",
     skill: "",
     country: "Việt Nam",
-    points: 0,
-    expireDate: "",
-    postedAds: 0,
+    expireDate: "N/A",
   };
 
   const [userData, setUserData] = useState(defaultUserData);
@@ -32,7 +30,14 @@ const UserList = () => {
       try {
         const users = await userApi.getUsers();
         if (users && users.length > 0) {
-          setUserData(users[0]); // Hiển thị người dùng đầu tiên
+          const user = users[0];
+          const filledUser = {
+            ...defaultUserData,
+            ...user,
+            gender: user.gender || "Nam", // Giữ chuỗi rỗng nếu không có giá trị
+            phone: user.phone || "0912345678", // Giữ chuỗi rỗng nếu không có giá trị
+          };
+          setUserData(filledUser);
         } else {
           setError("Không tìm thấy người dùng nào.");
         }
@@ -47,11 +52,11 @@ const UserList = () => {
   }, []);
 
   const validateForm = () => {
-    if (!userData.fullName.trim()) {
+    if (!userData.fullName.trim() || userData.fullName === "N/A") {
       alert("Họ và tên là bắt buộc.");
       return false;
     }
-    if (!userData.email.includes("@")) {
+    if (!userData.email.includes("@") || userData.email === "N/A") {
       alert("Email không hợp lệ.");
       return false;
     }
@@ -71,6 +76,7 @@ const UserList = () => {
     if (validateForm()) {
       try {
         await userApi.updateUser(userData.id, userData);
+        setUserData({ ...userData }); // Cập nhật lại thông tin vào state
         alert("Cập nhật thông tin thành công!");
       } catch {
         alert("Lỗi khi cập nhật thông tin.");
@@ -197,10 +203,10 @@ const UserList = () => {
                 value={userData.skill}
                 onChange={handleChange}
               >
-                <option value="">Java</option>
-                <option value="tech">C#</option>
-                <option value="finance">Python</option>
-                <option value="education">.NET</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="python">Python</option>
+                <option value="dotnet">.NET</option>
               </select>
             </div>
             <div className={styles.info__formGroup}>
@@ -252,29 +258,10 @@ const UserList = () => {
             </div>
 
             <div className={styles.pointsInfo}>
-              {/* <p>Điểm tích lũy: {userData.points}</p>
-              <a href="#" className={styles.pointsPolicyLink}>
-                Xem chính sách tích lũy điểm
-              </a> */}
               <p className={styles.expireDate}>
                 Ngày tham gia: {userData.expireDate}
               </p>
             </div>
-
-            {/* <div className={styles.statsGrid}>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Tin đăng ký</span>
-                <span className={styles.statValue}>Không giới hạn</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Tin đã gửi</span>
-                <span className={styles.statValue}>{userData.postedAds}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Tin còn lại</span>
-                <span className={styles.statValue}>Không giới hạn</span>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
